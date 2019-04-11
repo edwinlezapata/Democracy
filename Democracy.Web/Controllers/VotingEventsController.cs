@@ -1,35 +1,38 @@
 ﻿namespace Democracy.Web.Controllers
 {
-    using System.Threading.Tasks;
-    using Democracy.Web.Data;
-    using Democracy.Web.Data.Entities;
+    using Data;
+    using Data.Entities;
+    using Democracy.Web.Helpers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
 
     public class VotingEventsController : Controller
     {
-        private readonly IRepository repository;
+        private readonly IVotingEventRepository votingEventRepository;
+        private readonly IUserHelper userHelper;
 
-        public VotingEventsController(IRepository repository)
+        public VotingEventsController(IVotingEventRepository votingEventRepository, IUserHelper userHelper)
         {
-            this.repository = repository;
+            this.votingEventRepository = votingEventRepository;
+            this.userHelper = userHelper;
         }
 
         // GET: VotingEvents
         public IActionResult Index()
         {
-            return View(this.repository.GetVotingEvents());
+            return View(this.votingEventRepository.GetAll());
         }
 
         // GET: VotingEvents/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var votingEvent = this.repository.GetVotingEvent(id.Value);
+            var votingEvent = await this.votingEventRepository.GetByIdAsync(id.Value);
             if (votingEvent == null)
             {
                 return NotFound();
@@ -51,8 +54,9 @@
         {
             if (ModelState.IsValid)
             {
-                this.repository.AddVotingEvent(votingEvent);
-                await this.repository.SaveAllAsync();
+                // TODO: Pending to change to: this.User.Identity.Name
+                votingEvent.User = await this.userHelper.GetUserByEmailAsync("edwinlezapata@gmail.com");
+                await this.votingEventRepository.CreateAsync(votingEvent);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -60,14 +64,14 @@
         }
 
         // GET: VotingEvents/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var votingEvent = this.repository.GetVotingEvent(id.Value);
+            var votingEvent = await this.votingEventRepository.GetByIdAsync(id.Value);
             if (votingEvent == null)
             {
                 return NotFound();
@@ -84,12 +88,13 @@
             {
                 try
                 {
-                    this.repository.UpdateVotingEvent(votingEvent);
-                    await this.repository.SaveAllAsync();
+                    // TODO: Pending to change to: this.User.Identity.Name
+                    votingEvent.User = await this.userHelper.GetUserByEmailAsync("edwinlezapata@gmail.com");
+                    await this.votingEventRepository.UpdateAsync(votingEvent);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.VotingEventExists(votingEvent.Id))
+                    if (!await this.votingEventRepository.ExistAsync(votingEvent.Id))
                     {
                         return NotFound();
                     }
@@ -104,14 +109,14 @@
         }
 
         // GET: VotingEvents/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var votingEvent = this.repository.GetVotingEvent(id.Value);
+            var votingEvent = await this.votingEventRepository.GetByIdAsync(id.Value);
             if (votingEvent == null)
             {
                 return NotFound();
@@ -125,11 +130,11 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var votingEvent = this.repository.GetVotingEvent(id);
-            this.repository.RemoveVotingEvent(votingEvent);
-            await this.repository.SaveAllAsync();
+            var votingEvent = await this.votingEventRepository.GetByIdAsync(id);
+            await this.votingEventRepository.DeleteAsync(votingEvent);
             return RedirectToAction(nameof(Index));
         }
     }
+
 
 }

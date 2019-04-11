@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class VotingEvent
+    public class VotingEvent:IEntity
     {
         public int Id { get; set; }
 
@@ -22,6 +22,7 @@
         [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
 
+        public User User { get; set; }
     }
 
 }
