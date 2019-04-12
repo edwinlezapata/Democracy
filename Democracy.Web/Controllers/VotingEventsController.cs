@@ -5,6 +5,7 @@
     using Democracy.Web.Helpers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class VotingEventsController : Controller
@@ -21,7 +22,7 @@
         // GET: VotingEvents
         public IActionResult Index()
         {
-            return View(this.votingEventRepository.GetAll());
+            return View(this.votingEventRepository.GetAll().OrderBy(v => v.EventName));
         }
 
         // GET: VotingEvents/Details/5

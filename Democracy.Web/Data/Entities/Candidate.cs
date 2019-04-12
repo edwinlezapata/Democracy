@@ -23,5 +23,18 @@
         public ICollection<Candidate> Candidates { get; set; }
 
         public VotingEvent VotingEvent { get; set; }
+
+        public string ImageFullPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.ImageUrl))
+                {
+                    return null;
+                }
+
+                return $"https://democracy.azurewebsites.net{this.ImageUrl.Substring(1)}";
+            }
+        }
     }
 }
