@@ -1,6 +1,7 @@
 ﻿namespace Democracy.UIForms.ViewModels
 {
     using System.Windows.Input;
+    using Democracy.UIForms.Views;
     using GalaSoft.MvvmLight.Command;
     using Xamarin.Forms;
 
@@ -11,6 +12,12 @@
         public string Password { get; set; }
 
         public ICommand LoginCommand => new RelayCommand(this.Login);
+
+        public LoginViewModel()
+        {
+            this.Email = "edwinlezapata@gmail.com";
+            this.Password = "123456";
+        }
 
         private async void Login()
         {
@@ -41,11 +48,13 @@
                 return;
             }
 
-            await Application.Current.MainPage.DisplayAlert(
-                "Ok", 
-                "Welcome Friend!!!", 
-                "Accept");
+            //await Application.Current.MainPage.DisplayAlert(
+            //   "Ok", 
+            //  "Welcome Friend!!!", 
+            //  "Accept");
+
+            MainViewModel.GetInstance().VotingEvents = new VotingEventsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new VotingEventsPage());
         }
     }
-
 }

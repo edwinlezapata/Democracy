@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Democracy.Common.Models
+﻿namespace Democracy.Common.Models
 {
+    using System;
+    using Newtonsoft.Json;
+   
+
     public class User
     {
         [JsonProperty("firstName")]

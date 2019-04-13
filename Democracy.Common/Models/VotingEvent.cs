@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Democracy.Common.Models
 {
@@ -7,8 +8,8 @@ namespace Democracy.Common.Models
         [JsonProperty("id")]
         public long Id { get; set; }
 
-        [JsonProperty("imageUrl")]
-        public object ImageUrl { get; set; }
+        [JsonProperty("imageFullPath")]
+        public Uri ImageFullPath { get; set; }
 
         [JsonProperty("eventName")]
         public string EventName { get; set; }
