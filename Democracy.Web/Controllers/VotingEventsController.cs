@@ -4,6 +4,7 @@
     using Data.Entities;
     using Democracy.Web.Helpers;
     using Democracy.Web.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System;
@@ -11,6 +12,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    [Authorize]
     public class VotingEventsController : Controller
     {
         private readonly IVotingEventRepository votingEventRepository;
