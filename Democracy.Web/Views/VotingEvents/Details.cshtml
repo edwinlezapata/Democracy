@@ -11,6 +11,15 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="width:300px;height:450px;max-width: 100%; height: auto;" />
+            }
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.EventName)
         </dt>
         <dd>
