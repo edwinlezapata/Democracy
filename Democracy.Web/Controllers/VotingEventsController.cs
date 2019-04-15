@@ -82,8 +82,8 @@
 
                 var votingEvent = this.ToVotingEvent(view, path);
 
-                // TODO: Pending to change to: this.User.Identity.Name
-                votingEvent.User = await this.userHelper.GetUserByEmailAsync("edwinlezapata@gmail.com");
+                
+                votingEvent.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.votingEventRepository.CreateAsync(votingEvent);
                 return RedirectToAction(nameof(Index));
             }
@@ -168,9 +168,8 @@
 
                     var votingEvent = this.ToVotingEvent(view, path);
 
-
-                    // TODO: Pending to change to: this.User.Identity.Name
-                    votingEvent.User = await this.userHelper.GetUserByEmailAsync("edwinlezapata@gmail.com");
+                    
+                    votingEvent.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.votingEventRepository.UpdateAsync(votingEvent);
                 }
                 catch (DbUpdateConcurrencyException)
