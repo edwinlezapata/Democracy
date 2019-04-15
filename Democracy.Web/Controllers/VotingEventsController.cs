@@ -12,7 +12,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    [Authorize]
+    
     public class VotingEventsController : Controller
     {
         private readonly IVotingEventRepository votingEventRepository;
@@ -48,6 +48,7 @@
         }
 
         // GET: VotingEvents/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -106,6 +107,7 @@
         }
 
         // GET: VotingEvents/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -189,6 +191,7 @@
         }
 
         // GET: VotingEvents/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -215,6 +218,4 @@
             return RedirectToAction(nameof(Index));
         }
     }
-
-
 }
