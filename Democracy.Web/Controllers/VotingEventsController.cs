@@ -35,13 +35,13 @@
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("VotingEventNotFound");
             }
 
             var votingEvent = await this.votingEventRepository.GetByIdAsync(id.Value);
             if (votingEvent == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("VotingEventNotFound");
             }
 
             return View(votingEvent);
@@ -112,13 +112,13 @@
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("VotingEventNotFound");
             }
 
             var votingEvent = await this.votingEventRepository.GetByIdAsync(id.Value);
             if (votingEvent == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("VotingEventNotFound");
             }
 
             var view = this.ToVotingEventViewModel(votingEvent);
@@ -178,7 +178,7 @@
                 {
                     if (!await this.votingEventRepository.ExistAsync(view.Id))
                     {
-                        return NotFound();
+                        return new NotFoundViewResult("VotingEventNotFound");
                     }
                     else
                     {
@@ -196,13 +196,13 @@
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("VotingEventNotFound");
             }
 
             var votingEvent = await this.votingEventRepository.GetByIdAsync(id.Value);
             if (votingEvent == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("VotingEventNotFound");
             }
 
             return View(votingEvent);
@@ -217,5 +217,11 @@
             await this.votingEventRepository.DeleteAsync(votingEvent);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult VotingEventNotFound()
+        {
+            return this.View();
+        }
+
     }
 }
