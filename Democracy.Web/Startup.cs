@@ -1,5 +1,8 @@
 ﻿namespace Democracy.Web
 {
+    using Data;
+    using Data.Entities;
+    using Helpers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -8,9 +11,8 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Data;
-    using Data.Entities;
-    using Helpers;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Text;
 
     public class Startup
     {
@@ -35,7 +37,22 @@
                 cfg.Password.RequiredLength = 6;
             })
 
-        .AddEntityFrameworkStores<DataContext>();
+            .AddEntityFrameworkStores<DataContext>();
+
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                 {
+                     cfg.TokenValidationParameters = new TokenValidationParameters
+                     {
+                         ValidIssuer = this.Configuration["Tokens:Issuer"],
+                         ValidAudience = this.Configuration["Tokens:Audience"],
+                         IssuerSigningKey = new SymmetricSecurityKey(
+                         Encoding.UTF8.GetBytes(this.Configuration["Tokens:Key"]))
+                     };
+                 });
+
+
             services.AddDbContext<DataContext>(cfg =>
             {
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
