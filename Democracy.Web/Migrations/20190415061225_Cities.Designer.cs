@@ -4,14 +4,16 @@ using Democracy.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Democracy.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190415061225_Cities")]
+    partial class Cities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,36 +154,6 @@ namespace Democracy.Web.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Democracy.Web.Data.Entities.Voting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CandidateId");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.Property<int>("Vote");
-
-                    b.Property<int>("VotingEventId");
-
-                    b.Property<int?>("VotingId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CandidateId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("VotingEventId");
-
-                    b.HasIndex("VotingId");
-
-                    b.ToTable("Votings");
                 });
 
             modelBuilder.Entity("Democracy.Web.Data.Entities.VotingEvent", b =>
@@ -346,28 +318,6 @@ namespace Democracy.Web.Migrations
                         .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Democracy.Web.Data.Entities.Voting", b =>
-                {
-                    b.HasOne("Democracy.Web.Data.Entities.Candidate", "Candidate")
-                        .WithMany()
-                        .HasForeignKey("CandidateId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Democracy.Web.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Democracy.Web.Data.Entities.VotingEvent", "VotingEvent")
-                        .WithMany()
-                        .HasForeignKey("VotingEventId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Democracy.Web.Data.Entities.Voting")
-                        .WithMany("Items")
-                        .HasForeignKey("VotingId");
                 });
 
             modelBuilder.Entity("Democracy.Web.Data.Entities.VotingEvent", b =>

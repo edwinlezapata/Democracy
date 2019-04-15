@@ -81,6 +81,7 @@
                     path = $"~/images/VotingEvents/{file}";
                 }
 
+                
                 var votingEvent = this.ToVotingEvent(view, path);
 
                 

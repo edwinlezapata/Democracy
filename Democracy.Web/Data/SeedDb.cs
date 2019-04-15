@@ -4,6 +4,7 @@
     using Entities;
     using Microsoft.AspNetCore.Identity;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -27,6 +28,22 @@
             await this.userHelper.CheckRoleAsync("Admin");
             await this.userHelper.CheckRoleAsync("Voter");
 
+            if (!this.context.Countries.Any())
+            {
+                var cities = new List<City>();
+                cities.Add(new City { Name = "Medellín" });
+                cities.Add(new City { Name = "Bogotá" });
+                cities.Add(new City { Name = "Calí" });
+
+                this.context.Countries.Add(new Country
+                {
+                    Cities = cities,
+                    Name = "Colombia"
+                });
+
+                await this.context.SaveChangesAsync();
+            }
+
 
             var user = await this.userHelper.GetUserByEmailAsync("edwinlezapata@gmail.com");
             if (user == null)
@@ -37,7 +54,13 @@
                     LastName = "Zapata",
                     Email = "edwinlezapata@gmail.com",
                     UserName = "edwinlezapata@gmail.com",
-                    PhoneNumber = "3015017785"
+                    PhoneNumber = "3015017785",
+                    Occupation = "Enginered",
+                    Stratum = "1",
+                    Gender = "M",
+                    CityId = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault().Id,
+                    City = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault()
+
                 };
 
                 var result = await this.userHelper.AddUserAsync(user, "123456");
