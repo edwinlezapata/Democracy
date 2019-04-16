@@ -1,7 +1,9 @@
 ﻿namespace Democracy.Web.Data
 {
     using Entities;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Models;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -18,6 +20,14 @@
         Task<int> UpdateCityAsync(City city);
 
         Task<int> DeleteCityAsync(City city);
+
+        IEnumerable<SelectListItem> GetComboCountries();
+
+        IEnumerable<SelectListItem> GetComboCities(int conuntryId);
+
+        Task<Country> GetCountryAsync(City city);
+
     }
+
 
 }
