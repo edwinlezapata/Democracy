@@ -4,14 +4,16 @@ using Democracy.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Democracy.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190417145258_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,6 +27,8 @@ namespace Democracy.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CandidateId");
+
                     b.Property<string>("ImageUrl");
 
                     b.Property<string>("NameCandidate")
@@ -37,6 +41,8 @@ namespace Democracy.Web.Migrations
                     b.Property<int?>("VotingEventId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CandidateId");
 
                     b.HasIndex("VotingEventId");
 
@@ -84,12 +90,14 @@ namespace Democracy.Web.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<DateTime?>("BirthDay");
+                    b.Property<string>("BirthDay");
 
                     b.Property<int>("CityId");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Country");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -316,6 +324,10 @@ namespace Democracy.Web.Migrations
 
             modelBuilder.Entity("Democracy.Web.Data.Entities.Candidate", b =>
                 {
+                    b.HasOne("Democracy.Web.Data.Entities.Candidate")
+                        .WithMany("Candidates")
+                        .HasForeignKey("CandidateId");
+
                     b.HasOne("Democracy.Web.Data.Entities.VotingEvent", "VotingEvent")
                         .WithMany("Candidates")
                         .HasForeignKey("VotingEventId");

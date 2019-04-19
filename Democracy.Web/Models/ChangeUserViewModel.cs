@@ -1,6 +1,7 @@
 ﻿namespace Democracy.Web.Models
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -33,7 +34,7 @@
 
         [Required]
         [Display(Name = "BirthDay")]
-        public string BirthDay { get; set; }
+        public DateTime? BirthDay { get; set; }
 
         [Required]
         [Display(Name = "Country")]

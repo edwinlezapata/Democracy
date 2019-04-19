@@ -2,10 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity;
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class User : IdentityUser
     {
@@ -22,13 +19,11 @@
         public string Stratum { get; set; }
 
         [MaxLength(20, ErrorMessage = "The field {0} only can contain {1} characters length.")]
-        public string Gender{ get; set; }
+        public string Gender { get; set; }
 
         [Display(Name = "Birth Day")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        public string BirthDay { get; set; }
-
-        public string Country { get; set; }
+        public DateTime? BirthDay { get; set; }
 
         public bool IsAdmin { get; set; }
 

@@ -54,10 +54,10 @@
                     LastName = "Zapata",
                     Email = "edwinlezapata@gmail.com",
                     UserName = "edwinlezapata@gmail.com",
-                    PhoneNumber = "3015017785",
                     Occupation = "Enginered",
                     Stratum = "1",
                     Gender = "M",
+                    PhoneNumber = "3015017785",
                     CityId = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault().Id,
                     City = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault()
 

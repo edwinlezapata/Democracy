@@ -12,7 +12,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    
+
     public class VotingEventsController : Controller
     {
         private readonly IVotingEventRepository votingEventRepository;
@@ -27,7 +27,8 @@
         // GET: VotingEvents
         public IActionResult Index()
         {
-            return View(this.votingEventRepository.GetAll().OrderBy(v => v.EventName));
+           // return View(this.votingEventRepository.GetAll());
+            return View(this.votingEventRepository.GetVotingEventsWithCandidates());
         }
 
         // GET: VotingEvents/Details/5
@@ -38,7 +39,7 @@
                 return new NotFoundViewResult("VotingEventNotFound");
             }
 
-            var votingEvent = await this.votingEventRepository.GetByIdAsync(id.Value);
+            var votingEvent = await this.votingEventRepository.GetVotingEventWithCandidatesAsync(id.Value);
             if (votingEvent == null)
             {
                 return new NotFoundViewResult("VotingEventNotFound");
@@ -81,10 +82,10 @@
                     path = $"~/images/VotingEvents/{file}";
                 }
 
-                
+
                 var votingEvent = this.ToVotingEvent(view, path);
 
-                
+
                 votingEvent.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.votingEventRepository.CreateAsync(votingEvent);
                 return RedirectToAction(nameof(Index));
@@ -171,7 +172,7 @@
 
                     var votingEvent = this.ToVotingEvent(view, path);
 
-                    
+
                     votingEvent.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.votingEventRepository.UpdateAsync(votingEvent);
                 }
@@ -224,5 +225,148 @@
             return this.View();
         }
 
+        // GET: VotingEvents/Create
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddCandidate(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var votingEvent = await this.votingEventRepository.GetByIdAsync(id.Value);
+            if (votingEvent == null)
+            {
+                return NotFound();
+            }
+
+            var model = new CandidateViewModel { VotingEventId = votingEvent.Id };
+            return View(model);
+        }
+
+        // POST: VotingEvents/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCandidate(CandidateViewModel view)
+        {
+            if (this.ModelState.IsValid)
+            {
+                if (view.ImageFile != null && view.ImageFile.Length > 0)
+                {
+                    view.ImageUrl = await this.PathImages(view);
+                }
+                await this.votingEventRepository.AddCandidateAsync(view);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(view);
+        }
+
+        public async Task<IActionResult> DeleteCandidate(int? id)
+        {
+            if (id == null)
+            {
+                return new NotFoundViewResult("VotingEventNotFound");
+            }
+            var candidate = await this.votingEventRepository.GetCandidateAsync(id.Value);
+            if (candidate == null)
+            {
+                return new NotFoundViewResult("VotingEventNotFound");
+            }
+            var VotingEventId = await this.votingEventRepository.DeleteCandidateAsync(candidate);
+            return this.RedirectToAction($"Details/{VotingEventId}");
+        }
+
+        public async Task<IActionResult> EditCandidate(int? id)
+        {
+            if (id == null)
+            {
+                return new NotFoundViewResult("EventNotFound");
+            }
+            var candidate = await this.votingEventRepository.GetCandidateAsync(id.Value);
+            if (candidate == null)
+            {
+                return new NotFoundViewResult("EventNotFound");
+            }
+            var view = this.ToCandidate(candidate);
+            return View(view);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditCandidate(CandidateViewModel view)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var path = view.ImageUrl;
+                    if (view.ImageFile != null && view.ImageFile.Length > 0)
+                    {
+                        path = await this.PathImages(view);
+                    }
+                    var candidate = this.ToCandidate(view, path);
+                    await this.votingEventRepository.UpdateCandidateAsync(candidate);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await this.votingEventRepository.ExistAsync(view.CandidateId))
+                    {
+                        return new NotFoundViewResult("EventNotFound");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(view);
+        }
+
+        private CandidateViewModel ToCandidate(Candidate candidate)
+        {
+            return new CandidateViewModel
+            {
+                CandidateId = candidate.Id,
+                NameCandidate = candidate.NameCandidate,
+                Proposal = candidate.Proposal,
+                ImageUrl = candidate.ImageUrl
+            };
+        }
+
+        private Candidate ToCandidate(CandidateViewModel candidate, string path)
+        {
+            return new Candidate
+            {
+                Id = candidate.CandidateId,
+                ImageUrl = path,
+                NameCandidate = candidate.NameCandidate,
+                Proposal = candidate.Proposal
+            };
+        }
+
+        private async Task<string> PathImages(CandidateViewModel view)
+        {
+            if (view != null)
+            {
+                var guid = Guid.NewGuid().ToString();
+                var file = $"{guid}.jpg";
+
+                var path = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot\\images\\Candidates",
+                    file);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await view.ImageFile.CopyToAsync(stream);
+                }
+
+                return $"~/images/Candidates/{file}";
+            }
+            return null;
+        }
     }
+
 }

@@ -1,0 +1,40 @@
+﻿@model Democracy.Web.Models.CandidateViewModel
+
+<h4>Add Candidate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddCandidate" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VotingEventId" />
+
+            <div class="form-group">
+                <label asp-for="NameCandidate" class="control-label"></label>
+                <input asp-for="NameCandidate" class="form-control" />
+                <span asp-validation-for="NameCandidate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Proposal" class="control-label"></label>
+                @Html.TextAreaFor(model => model.Proposal, new { @class = "form-control", @rows = 4 })
+                <span asp-validation-for="Proposal" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" type="file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

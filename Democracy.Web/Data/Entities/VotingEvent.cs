@@ -43,7 +43,15 @@
 
         public User User { get; set; }
 
+        public ICollection<Candidate> Candidates { get; set; }
+
         public ICollection<Voting> Votings { get; set; }
+
+        [Display(Name = "# Candidates")]
+        public int NumberCandidates{ get { return this.Candidates == null ? 0 : this.Candidates.Count; } }
+
+        [Display(Name = "# Votes")]
+        public int NumberVotes { get { return this.Votings == null ? 0 : this.Votings.Count; } }
 
     }
 
