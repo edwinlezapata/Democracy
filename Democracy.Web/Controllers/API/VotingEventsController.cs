@@ -16,10 +16,10 @@
             this.votingEventRepository = votingEventRepository;
         }
 
-        //[HttpGet]
-       // public IActionResult GetVotingEvents()
-       // {
-           // return this.Ok(this.votingEventRepository.GetAllWithUsers());
-       // }
+        [HttpGet]
+       public IActionResult GetVotingEvents()
+       {
+         return Ok(this.votingEventRepository.GetAllWithUsers());
+       }
     }
 }

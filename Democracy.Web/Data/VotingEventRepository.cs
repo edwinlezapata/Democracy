@@ -83,6 +83,11 @@
             await this.context.SaveChangesAsync();
             return votingEvent.Id;
         }
+
+        public IQueryable GetAllWithUsers()
+        {
+            return this.context.VotingEvents.Include(v => v.User);
+        }
     }
 
 }

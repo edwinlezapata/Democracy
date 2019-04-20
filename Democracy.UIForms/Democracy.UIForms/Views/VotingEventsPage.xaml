@@ -30,18 +30,34 @@
                                 	Grid.Column="1"
                                 	VerticalOptions="Center">
                                     <Label
+                                        Text="Event Name"
+                                        TextColor="Black">
+                                    </Label>
+                                    <Label
                                     	FontAttributes="Bold"
                                     	FontSize ="Medium"
                                     	Text="{Binding EventName}"
                                     	TextColor="Black">
                                     </Label>
                                     <Label
+                                        Text="Description"
+                                        TextColor="Black">
+                                    </Label>
+                                    <Label
                                     	Text="{Binding Description}"
                                     	TextColor="Black">
                                     </Label>
                                     <Label
+                                        Text="Start Date"
+                                        TextColor="Black">
+                                    </Label>
+                                    <Label
                                     	Text="{Binding StartDate}"
                                     	TextColor="Navy">
+                                    </Label>
+                                    <Label
+                                        Text="End Date"
+                                        TextColor="Black">
                                     </Label>
                                     <Label
                                     	Text="{Binding EndDate}"

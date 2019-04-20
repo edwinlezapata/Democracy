@@ -36,11 +36,13 @@
         private async void LoadVotingEvents()
         {
             this.IsRefreshing = true;
-
+            var url = Application.Current.Resources["UrlAPI"].ToString();
             var response = await this.apiService.GetListAsync<VotingEvent>(
-                "https://democracy.azurewebsites.net",
+                url,
                 "/api",
-                "/VotingEvents");
+                "/VotingEvents",
+                "bearer",
+                MainViewModel.GetInstance().Token.Token);
 
             this.IsRefreshing = false;
 

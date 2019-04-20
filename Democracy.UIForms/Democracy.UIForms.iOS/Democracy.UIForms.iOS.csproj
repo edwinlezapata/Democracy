@@ -134,4 +134,8 @@
       <Name>Democracy.UIForms</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Democracy4.png" />
+    <BundleResource Include="Resources\LogoDemocracy.jpg" />
+  </ItemGroup>
 </Project>

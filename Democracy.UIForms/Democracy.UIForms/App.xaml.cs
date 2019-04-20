@@ -1,13 +1,14 @@
-﻿using Democracy.UIForms.ViewModels;
-using Democracy.UIForms.Views;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace Democracy.UIForms
+﻿namespace Democracy.UIForms
 {
+    using Democracy.UIForms.ViewModels;
+    using Democracy.UIForms.Views;
+    using Xamarin.Forms;
+
     public partial class App : Application
     {
+        public static NavigationPage Navigator { get; internal set; }
+        public static MasterPage Master { get; internal set; }
+
         public App()
         {
             InitializeComponent();

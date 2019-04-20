@@ -7,6 +7,8 @@
 
     public interface IVotingEventRepository : IGenericRepository<VotingEvent>
     {
+        IQueryable GetAllWithUsers();
+
         IQueryable GetVotingEventsWithCandidates();
 
         Task<VotingEvent> GetVotingEventWithCandidatesAsync(int id);
