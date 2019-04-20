@@ -48,9 +48,9 @@
         {
             return this.context.VotingEvents
             .Include(c => c.Candidates)
-            .Include(u => u.User)
-            .Where(d => d.EndDate > DateTime.Now)
-            .OrderBy(e => e.EndDate);
+            .Include(u => u.User);
+            //.Where(d => d.EndDate > DateTime.Now)
+            //.OrderBy(e => e.EndDate);
 
         }
 
@@ -61,6 +61,7 @@
 
         public async Task<int> UpdateCandidateAsync(Candidate candidate)
         {
+          
             var votingEvent = await this.context.VotingEvents.Where(c => c.Candidates.Any(ca => ca.Id == candidate.Id)).FirstOrDefaultAsync();
             if (votingEvent == null)
             {

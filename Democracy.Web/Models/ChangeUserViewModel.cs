@@ -33,7 +33,8 @@
 
 
         [Required]
-        [Display(Name = "BirthDay")]
+        [Display(Name = "Birth Day")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? BirthDay { get; set; }
 
         [Required]

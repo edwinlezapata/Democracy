@@ -1,0 +1,49 @@
+﻿@model Democracy.Web.Data.Entities.Candidate
+
+<h4>Candidate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditCandidate" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageUrl" />
+
+            <div class="col-md-4">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="width:300px;height:450px;max-width: 100%; height: auto;" />
+                }
+            </div>
+
+                <div class="form-group">
+                    <label asp-for="NameCandidate" class="control-label"></label>
+                    <input asp-for="NameCandidate" class="form-control" />
+                    <span asp-validation-for="NameCandidate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Proposal" class="control-label"></label>
+                    @Html.TextAreaFor(model => model.Proposal, new { @class = "form-control", @rows = 4 })
+                    <span asp-validation-for="Proposal" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImageUrl" class="control-label"></label>
+                    <input asp-for="ImageUrl" class="form-control" type="file" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
+                </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

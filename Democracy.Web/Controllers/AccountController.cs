@@ -21,16 +21,19 @@
         private readonly IUserHelper userHelper;
         private readonly ICountryRepository countryRepository;
         private readonly IConfiguration configuration;
+        private readonly IMailHelper mailHelper;
 
         public AccountController(
             IUserHelper userHelper,
             ICountryRepository countryRepository,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IMailHelper mailHelper)
 
         {
             this.userHelper = userHelper;
             this.countryRepository = countryRepository;
             this.configuration = configuration;
+            this.mailHelper = mailHelper;
         }
 
         public IActionResult Login()
@@ -113,22 +116,17 @@
                         return this.View(model);
                     }
 
-
-                    var loginViewModel = new LoginViewModel
+                    var myToken = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
+                    var tokenLink = this.Url.Action("ConfirmEmail", "Account", new
                     {
-                        Password = model.Password,
-                        RememberMe = false,
-                        Username = model.Username
-                    };
+                        userid = user.Id,
+                        token = myToken
+                    }, protocol: HttpContext.Request.Scheme);
 
-                    var result2 = await this.userHelper.LoginAsync(loginViewModel);
-
-                    if (result2.Succeeded)
-                    {
-                        return this.RedirectToAction("Index", "Home");
-                    }
-
-                    this.ModelState.AddModelError(string.Empty, "The user couldn't be login.");
+                    this.mailHelper.SendMail(model.Username, "Democracy Email confirmation", $"<h1>Democracy Email Confirmation</h1>" +
+                        $"Welcome and thank you very much for registering in our Democracy voting application. To allow the user, " +
+                        $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+                    this.ViewBag.Message = "The instructions to allow your user has been sent to email.";
                     return this.View(model);
                 }
 
@@ -137,6 +135,7 @@
 
             return this.View(model);
         }
+
 
         public async Task<IActionResult> ChangeUser()
         {
@@ -296,6 +295,154 @@
             var country = await this.countryRepository.GetCountryWithCitiesAsync(countryId);
             return this.Json(country.Cities.OrderBy(c => c.Name));
         }
+
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                return this.NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                return this.NotFound();
+            }
+
+            var result = await this.userHelper.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+            {
+                return this.NotFound();
+            }
+
+            return View();
+        }
+
+        public IActionResult RecoverPassword()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = await this.userHelper.GetUserByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "The email doesn't correspont to a registered user.");
+                    return this.View(model);
+                }
+
+                var myToken = await this.userHelper.GeneratePasswordResetTokenAsync(user);
+                var link = this.Url.Action(
+                    "ResetPassword",
+                    "Account",
+                    new { token = myToken }, protocol: HttpContext.Request.Scheme);
+                this.mailHelper.SendMail(model.Email, "Democracy Password Reset", $"<h1>Democracy Password Reset</h1>" +
+                    $"To reset the password click in this link:</br></br>" +
+                    $"<a href = \"{link}\">Reset Password</a>");
+                this.ViewBag.Message = "The instructions to recover your password has been sent to email.";
+                return this.View();
+
+            }
+
+            return this.View(model);
+        }
+
+        public IActionResult ResetPassword(string token)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            var user = await this.userHelper.GetUserByEmailAsync(model.UserName);
+            if (user != null)
+            {
+                var result = await this.userHelper.ResetPasswordAsync(user, model.Token, model.Password);
+                if (result.Succeeded)
+                {
+                    this.ViewBag.Message = "Password reset successful.";
+                    return this.View();
+                }
+
+                this.ViewBag.Message = "Error while resetting the password.";
+                return View(model);
+            }
+
+            this.ViewBag.Message = "User not found.";
+            return View(model);
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var users = await this.userHelper.GetAllUsersAsync();
+            foreach (var user in users)
+            {
+                var myUser = await this.userHelper.GetUserByIdAsync(user.Id);
+                if (myUser != null)
+                {
+                    user.IsAdmin = await this.userHelper.IsUserInRoleAsync(myUser, "Admin");
+                }
+            }
+
+            return this.View(users);
+        }
+
+        public async Task<IActionResult> AdminOff(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await this.userHelper.RemoveUserFromRoleAsync(user, "Admin");
+            return this.RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> AdminOn(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await this.userHelper.AddUserToRoleAsync(user, "Admin");
+            return this.RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await this.userHelper.DeleteUserAsync(user);
+            return this.RedirectToAction(nameof(Index));
+        }
+
 
     }
 }

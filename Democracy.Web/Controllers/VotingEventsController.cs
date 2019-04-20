@@ -244,7 +244,7 @@
             return View(model);
         }
 
-        // POST: VotingEvents/Create
+        // POST: Candidates/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddCandidate(CandidateViewModel view)
@@ -287,41 +287,24 @@
             {
                 return new NotFoundViewResult("EventNotFound");
             }
-            var view = this.ToCandidate(candidate);
-            return View(view);
+            //var view = this.ToCandidate(candidate);
+            return View(candidate);
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditCandidate(CandidateViewModel view)
+        public async Task<IActionResult> EditCandidate(Candidate candidate)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                try
+                var candidateId = await this.votingEventRepository.UpdateCandidateAsync(candidate);
+                if (candidateId != 0)
                 {
-                    var path = view.ImageUrl;
-                    if (view.ImageFile != null && view.ImageFile.Length > 0)
-                    {
-                        path = await this.PathImages(view);
-                    }
-                    var candidate = this.ToCandidate(view, path);
-                    await this.votingEventRepository.UpdateCandidateAsync(candidate);
+                    return this.RedirectToAction($"Details/{candidateId}");
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!await this.votingEventRepository.ExistAsync(view.CandidateId))
-                    {
-                        return new NotFoundViewResult("EventNotFound");
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
 
-            return View(view);
+            return this.View(candidate);
         }
 
         private CandidateViewModel ToCandidate(Candidate candidate)
