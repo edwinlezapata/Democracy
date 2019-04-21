@@ -18,10 +18,10 @@ namespace Democracy.Common.Models
         public string Description { get; set; }
 
         [JsonProperty("startDate")]
-        public object StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [JsonProperty("endDate")]
-        public object EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [JsonProperty("user")]
         public User User { get; set; }

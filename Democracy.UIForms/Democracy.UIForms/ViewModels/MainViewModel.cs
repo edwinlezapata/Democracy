@@ -15,6 +15,10 @@ namespace Democracy.UIForms.ViewModels
 
         public VotingEventsViewModel VotingEvents { get; set; }
 
+        public RegisterViewModel Register { get; set; }
+
+        public RememberPasswordViewModel RememberPassword { get; set; }
+
         public MainViewModel()
         {
             instance = this;

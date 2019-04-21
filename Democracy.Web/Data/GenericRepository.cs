@@ -30,6 +30,7 @@
         {
             await this.context.Set<T>().AddAsync(entity);
             await SaveAllAsync();
+            
         }
 
         public async Task UpdateAsync(T entity)

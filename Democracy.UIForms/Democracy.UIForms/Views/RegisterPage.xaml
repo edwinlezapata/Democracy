@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+         	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+         	x:Class="Democracy.UIForms.Views.RegisterPage"
+         	BindingContext="{Binding Main, Source={StaticResource Locator}}"
+         	Title="Register New User">
+    <ContentPage.Content>
+        <ScrollView
+        	BindingContext="{Binding Register}">
+            <StackLayout
+            	Padding="8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="0"
+                    	Text="First name"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="0"
+                    	Placeholder="Enter your first name..."
+                    	Text="{Binding FirstName}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="1"
+                    	Text="Last name"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="1"
+                    	Placeholder="Enter your last name..."
+                    	Text="{Binding LastName}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="2"
+                    	Text="Email"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="2"
+                    	Keyboard="Email"
+                    	Placeholder="Enter your email..."
+                    	Text="{Binding Email}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="3"
+                    	Text="Occupations"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="3"
+                    	Placeholder="Enter your Occupation..."
+                    	Text="{Binding Occupations}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="4"
+                    	Text="Stratum"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Picker 
+                        Grid.Column="1"
+                    	Grid.Row="4"
+                        x:Name="Stratum"
+                        Title ="Enter your Stratum..."
+                        SelectedIndex="{Binding Stratum}" HorizontalOptions="FillAndExpand">
+                        <Picker.Items>
+                            <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                            <x:String>4</x:String>
+                            <x:String>5</x:String>
+                            <x:String>6</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="5"
+                    	Text="Gender"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Picker 
+                        Grid.Column="1"
+                    	Grid.Row="5"
+                        x:Name="Gender" 
+                        Title ="Enter your Gender..."
+                        SelectedIndex="{Binding Gender}" HorizontalOptions="FillAndExpand">
+                        <Picker.Items>
+                            <x:String>Male</x:String>
+                            <x:String>Female</x:String>
+                            <x:String>Other</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="6"
+                    	Text="Phone"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="6"
+                    	Keyboard="Telephone"
+                    	Placeholder="Enter your phone number..."
+                    	Text="{Binding PhoneNumber}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="7"
+                    	Text="BirthDate"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <DatePicker
+                        Grid.Column="1"
+                    	Grid.Row="7"
+                        x:Name="Birthdate"
+                        Format="D"
+                        Date="{Binding BirthDay}">
+                    </DatePicker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="8"
+                    	Text="Country"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Picker
+                    	Grid.Column="1"
+                    	Grid.Row="8"
+                    	ItemDisplayBinding="{Binding Name}"
+                    	ItemsSource="{Binding Countries}"
+                    	SelectedItem="{Binding Country}"
+                    	Title="Select a country...">
+                    </Picker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="9"
+                    	Text="City"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Picker
+                    	Grid.Column="1"
+                    	Grid.Row="9"
+                    	ItemDisplayBinding="{Binding Name}"
+                    	ItemsSource="{Binding Cities}"
+                    	SelectedItem="{Binding City}"
+                    	Title="Select a city...">
+                    </Picker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="10"
+                    	Text="Password"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="10"
+                    	IsPassword="True"
+                    	Placeholder="Enter your password..."
+                    	Text="{Binding Password}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="11"
+                    	Text="Password confirm"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="11"
+                    	IsPassword="True"
+                    	Placeholder="Enter your password confirm..."
+                    	Text="{Binding Confirm}">
+                    </Entry>
+                </Grid>
+                <ActivityIndicator
+                	IsRunning="{Binding IsRunning}"
+                	VerticalOptions="CenterAndExpand">
+                </ActivityIndicator>
+                <Button
+                	BackgroundColor="Blue"
+                	BorderRadius="23"
+                	Command="{Binding RegisterCommand}"
+                	HeightRequest="46"
+                	HorizontalOptions="FillAndExpand"
+                	IsEnabled="{Binding IsEnabled}"
+                	Text="Register New User"
+                	TextColor="White">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

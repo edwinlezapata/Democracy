@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:Shop.UIForms.Helpers"
              x:Class="Democracy.UIForms.Views.LoginPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
     Title="Login">
@@ -29,19 +30,42 @@
                 	Placeholder="Enter Your Password..."
                 	Text="{Binding Password}">
                 </Entry>
+                <Label
+	                HorizontalOptions="Center"
+	                Text="Forgot my password"
+	                TextColor="Blue">   
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RememberPasswordCommand }"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
                 <ActivityIndicator
                 	IsRunning="{Binding IsRunning}"
                     VerticalOptions="CenterAndExpand">
                 </ActivityIndicator>
-                <Button
-                	BackgroundColor="Blue"
-                	BorderRadius="23"
-                	Command="{Binding LoginCommand}"
-                	HeightRequest="46"
-                	IsEnabled="{Binding IsEnabled}"
-                	Text="Login"
-                	TextColor="White">
-                </Button>
+                <StackLayout
+	                Orientation="Horizontal">
+                    <Button
+    	                BackgroundColor="Navy"
+    	                BorderRadius="23"
+    	                Command="{Binding LoginCommand}"
+    	                HeightRequest="46"
+    	                HorizontalOptions="FillAndExpand"
+    	                IsEnabled="{Binding IsEnabled}"
+    	                Text="Login"
+    	                TextColor="White">
+                    </Button>
+                    <Button
+    	                BackgroundColor="Gray"
+    	                BorderRadius="23"
+    	                Command="{Binding RegisterCommand}"
+    	                HeightRequest="46"
+    	                HorizontalOptions="FillAndExpand"
+    	                IsEnabled="{Binding IsEnabled}"
+    	                Text="Add New User"
+    	                TextColor="White">
+                    </Button>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

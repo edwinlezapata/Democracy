@@ -187,7 +187,7 @@
                     user.Stratum = model.Stratum;
                     user.Gender = model.Gender;
                     user.PhoneNumber = model.PhoneNumber;
-                    user.BirthDay = model.BirthDay;
+                    user.BirthDay= model.BirthDay;
                     user.CityId = model.CityId;
                     user.City = city;
 
