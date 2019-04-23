@@ -1,10 +1,13 @@
 ﻿namespace Democracy.UIForms.ViewModels
 {
     using System.Windows.Input;
+    using Democracy.Common.Helpers;
     using Democracy.Common.Models;
     using Democracy.Common.Services;
+    using Democracy.UIForms.Helpers;
     using Democracy.UIForms.Views;
     using GalaSoft.MvvmLight.Command;
+    using Newtonsoft.Json;
     using Xamarin.Forms;
 
     public class LoginViewModel : BaseViewModel
@@ -12,6 +15,8 @@
         private bool isRunning;
         private bool isEnabled;
         private readonly ApiService apiService;
+
+        public bool IsRemember { get; set; }
 
         public bool IsRunning
         {
@@ -40,8 +45,9 @@
         {
             this.apiService = new ApiService();
             this.IsEnabled = true;
-            this.Email = "edwinlezapata@gmail.com";
-            this.Password = "123456";
+            //this.Email = "edwinlezapata@gmail.com";
+            //this.Password = "123456";
+            this.IsRemember = true;
         }
 
         private async void Login()
@@ -49,18 +55,18 @@
             if (string.IsNullOrEmpty(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You Must Enter A Email",
-                    "Accept");
+                    Languages.Error,
+                    Languages.EmailError,
+                    Languages.Accept);
                 return;
             }
 
             if (string.IsNullOrEmpty(this.Password))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error", 
-                    "You Must Enter A Password",
-                    "Accept");
+                    Languages.Error,
+                    Languages.PasswordError,
+                    Languages.Accept);
                 return;
             }
             this.IsRunning = true;
@@ -86,9 +92,9 @@
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error", 
-                    "Email or password incorrect.",
-                    "Accept");
+                    Languages.Error,
+                    Languages.Emailorpassworderror,
+                    Languages.Accept);
                 return;
             }
 
@@ -96,6 +102,12 @@
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = token;
             mainViewModel.VotingEvents = new VotingEventsViewModel();
+
+            Settings.IsRemember = this.IsRemember;
+            Settings.UserEmail = this.Email;
+            Settings.UserPassword = this.Password;
+            Settings.Token = JsonConvert.SerializeObject(token);
+
             Application.Current.MainPage = new MasterPage();
         }
 

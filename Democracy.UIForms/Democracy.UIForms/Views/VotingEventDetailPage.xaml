@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+         	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+         	x:Class="Democracy.UIForms.Views.VotingEventDetailPage"
+         	BindingContext="{Binding Main, Source={StaticResource Locator}}"
+         	Title="Voting Event Detail">
+    <ContentPage.Content>
+        <ScrollView
+        	BindingContext="{Binding VotingEventDetail}">
+            <StackLayout
+            	Padding="10">
+                <Label
+                	FontSize="Micro"
+                	HorizontalOptions="Center"
+                	Text="Image Event">
+                </Label>
+                <Image
+                   Source="{Binding VotingEvent.ImageFullPath}"
+                   WidthRequest="100">
+                </Image>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                    	Grid.Column="0"
+                    	Grid.Row="0"
+                    	Text="Name Event"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="0"
+                    	Text="{Binding VotingEvent.EventName}">
+                    </Entry>
+                    <Label
+                    	Grid.Column="0"
+                    	Grid.Row="1"
+                    	Text="Description"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="1"
+                    	Text="{Binding VotingEvent.Description}">
+                    </Entry>
+                    <Label
+                    	Grid.Column="0"
+                    	Grid.Row="2"
+                    	Text="Start Date"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="2"
+                    	Text="{Binding VotingEvent.StartDate}">
+                    </Entry>
+                    <Label
+                    	Grid.Column="0"
+                    	Grid.Row="3"
+                    	Text="End Date"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="3"
+                    	Text="{Binding VotingEvent.EndDate}">
+                    </Entry>
+                </Grid>
+                <ActivityIndicator
+                	IsRunning="{Binding IsRunning}"
+                	VerticalOptions="CenterAndExpand">
+                </ActivityIndicator>
+                <StackLayout
+                	Orientation="Horizontal">
+                    <Button
+                    	BackgroundColor="Navy"
+                    	BorderRadius="23"
+                    	Command="{Binding SaveCommand}"
+                    	HeightRequest="46"
+                    	HorizontalOptions="FillAndExpand"
+                    	IsEnabled="{Binding IsEnabled}"
+                    	Text="Save"
+                    	TextColor="White">
+                    </Button>
+                    <Button
+                    	BackgroundColor="Red"
+                    	BorderRadius="23"
+                    	Command="{Binding DeleteCommand}"
+                    	HeightRequest="46"
+                    	HorizontalOptions="FillAndExpand"
+                    	IsEnabled="{Binding IsEnabled}"
+                    	Text="Delete"
+                    	TextColor="White">
+                    </Button>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

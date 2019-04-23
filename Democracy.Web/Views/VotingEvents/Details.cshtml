@@ -16,7 +16,7 @@
         <dd>
             @if (!string.IsNullOrEmpty(Model.ImageUrl))
             {
-                <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="width:300px;height:450px;max-width: 100%; height: auto;" />
+                <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="width:200px;height:250px;max-width: 100%; height: auto;" />
             }
         </dd>
         <dt>
@@ -46,7 +46,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
     <a asp-action="AddCandidate" asp-route-id="@Model.Id" class="btn btn-info">Add Candidate</a>
     <a asp-action="Index" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Back to List</a>
 </div>

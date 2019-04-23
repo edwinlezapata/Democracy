@@ -1,4 +1,5 @@
 ﻿using Democracy.Common.Models;
+using Democracy.UIForms.Helpers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Democracy.UIForms.ViewModels
         public LoginViewModel Login { get; set; }
 
         public VotingEventsViewModel VotingEvents { get; set; }
+
+        public VotingEventDetailViewModel VotingEventDetail { get; set; }
 
         public RegisterViewModel Register { get; set; }
 
@@ -37,6 +40,10 @@ namespace Democracy.UIForms.ViewModels
 
         public TokenResponse Token { get; set; }
 
+        public string UserEmail { get; set; }
+
+        public string UserPassword { get; set; }
+
         private void LoadMenus()
         {
             var menus = new List<Menu>
@@ -45,21 +52,21 @@ namespace Democracy.UIForms.ViewModels
         {
             Icon = "ic_info",
             PageName = "AboutPage",
-            Title = "About"
+            Title = Languages.About
         },
 
         new Menu
         {
             Icon = "ic_settings_applications",
             PageName = "SetupPage",
-            Title = "Setup"
+            Title = Languages.Setup
         },
 
         new Menu
         {
             Icon = "ic_exit_to_app",
             PageName = "LoginPage",
-            Title = "Close session"
+            Title = Languages.CloseSession
         }
     };
 

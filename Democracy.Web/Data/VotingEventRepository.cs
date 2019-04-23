@@ -86,7 +86,9 @@
 
         public IQueryable GetAllWithUsers()
         {
-            return this.context.VotingEvents.Include(v => v.User);
+            return this.context.VotingEvents
+
+                .Include(u => u.User);
         }
     }
 

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:i18n="clr-namespace:Shop.UIForms.Helpers"
+             xmlns:i18n="clr-namespace:Democracy.UIForms.Helpers"
              x:Class="Democracy.UIForms.Views.LoginPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-    Title="Login">
+    Title="{i18n:Translate Login}">
     <ContentPage.Content>
         <ScrollView
         	BindingContext="{Binding Login}">
@@ -15,7 +15,7 @@
                 	Source="Democracy4">
                 </Image>
                 <Label
-                	Text="Email">
+                	Text="{i18n:Translate Email}">
                 </Label>
                 <Entry
                 	Keyboard="Email"
@@ -23,22 +23,33 @@
                 	Text="{Binding Email}">
                 </Entry>
                 <Label
-                	Text="Password">
+                	Text="{i18n:Translate Password}">
                 </Label>
                 <Entry
                 	IsPassword="True"
                 	Placeholder="Enter Your Password..."
                 	Text="{Binding Password}">
                 </Entry>
-                <Label
+                <StackLayout
 	                HorizontalOptions="Center"
-	                Text="Forgot my password"
-	                TextColor="Blue">   
+	                Orientation="Horizontal">
+                    <Label
+    	                Text="Rememberme in this device"
+    	                VerticalOptions="Center">
+                    </Label>
+                    <Switch
+    	                IsToggled="{Binding IsRemember}">
+                    </Switch>
+                </StackLayout>
+                <Label
+                    FontAttributes="Bold"
+	                HorizontalOptions="Center"
+	                Text="Forgot Password?"
+	                TextColor="Blue">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RememberPasswordCommand }"/>
                     </Label.GestureRecognizers>
                 </Label>
-
                 <ActivityIndicator
                 	IsRunning="{Binding IsRunning}"
                     VerticalOptions="CenterAndExpand">
@@ -56,7 +67,7 @@
     	                TextColor="White">
                     </Button>
                     <Button
-    	                BackgroundColor="Gray"
+    	                BackgroundColor="Blue"
     	                BorderRadius="23"
     	                Command="{Binding RegisterCommand}"
     	                HeightRequest="46"

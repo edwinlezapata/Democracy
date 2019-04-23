@@ -3,6 +3,7 @@
     using Common.Helpers;
     using Common.Services;
     using Democracy.Common.Models;
+    using Democracy.UIForms.Helpers;
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
     using Xamarin.Forms;
@@ -40,18 +41,18 @@
             if (string.IsNullOrEmpty(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter an email.",
-                    "Accept");
+                    Languages.Error,
+                    Languages.EmailError2,
+                    Languages.Accept);
                 return;
             }
 
             if (!RegexHelper.IsValidEmail(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter a valid email.",
-                    "Accept");
+                    Languages.Error,
+                    Languages.ValidEmail,
+                    Languages.Accept);
                 return;
             }
 
@@ -76,16 +77,16 @@
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
+                    Languages.Error,
                     response.Message,
-                    "Accept");
+                    Languages.Accept);
                 return;
             }
 
             await Application.Current.MainPage.DisplayAlert(
                 "Ok",
                 response.Message,
-                "Accept");
+                Languages.Accept);
             await Application.Current.MainPage.Navigation.PopAsync();
 
         }

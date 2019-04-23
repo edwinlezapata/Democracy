@@ -16,54 +16,57 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid >
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectVotingEventCommand}"/>
+                                </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image
-                                	Grid.Column="0"
-                                	Source="{Binding ImageFullPath}"
-                                	WidthRequest="100">
+                                	    Grid.Column="0"
+                                	    Source="{Binding ImageFullPath}"
+                                	    WidthRequest="100">
                                 </Image>
-                                <StackLayout
-                                	Grid.Column="1"
-                                	VerticalOptions="Center">
-                                    <Label
-                                        Text="Event Name"
-                                        TextColor="Black">
-                                    </Label>
-                                    <Label
-                                    	FontAttributes="Bold"
-                                    	FontSize ="Medium"
-                                    	Text="{Binding EventName}"
-                                    	TextColor="Black">
-                                    </Label>
-                                    <Label
-                                        Text="Description"
-                                        TextColor="Black">
-                                    </Label>
-                                    <Label
-                                    	Text="{Binding Description}"
-                                    	TextColor="Black">
-                                    </Label>
-                                    <Label
-                                        Text="Start Date"
-                                        TextColor="Black">
-                                    </Label>
-                                    <Label
-                                    	Text="{Binding StartDate}"
-                                    	TextColor="Navy">
-                                    </Label>
-                                    <Label
-                                        Text="End Date"
-                                        TextColor="Black">
-                                    </Label>
-                                    <Label
-                                    	Text="{Binding EndDate}"
-                                    	TextColor="Navy">
-                                    </Label>
-                                </StackLayout>
+                                    <StackLayout
+                                	        Grid.Column="1"
+                                	        VerticalOptions="Center">
+                                            <Label
+                                                Text="Event Name"
+                                                TextColor="Black">
+                                            </Label>
+                                            <Label
+                                    	        FontAttributes="Bold"
+                                    	        FontSize ="Medium"
+                                    	        Text="{Binding EventName}"
+                                    	        TextColor="Black">
+                                            </Label>
+                                            <Label
+                                                Text="Description"
+                                                TextColor="Black">
+                                            </Label>
+                                            <Label
+                                    	        Text="{Binding Description}"
+                                    	        TextColor="Black">
+                                            </Label>
+                                            <Label
+                                                Text="Start Date"
+                                                TextColor="Black">
+                                            </Label>
+                                            <Label
+                                    	        Text="{Binding StartDate}"
+                                    	        TextColor="Navy">
+                                            </Label>
+                                            <Label
+                                                Text="End Date"
+                                                TextColor="Black">
+                                            </Label>
+                                            <Label
+                                    	        Text="{Binding EndDate}"
+                                    	        TextColor="Navy">
+                                            </Label>
+                                    </StackLayout>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -72,3 +75,4 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+

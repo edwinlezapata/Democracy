@@ -2,8 +2,10 @@
 {
     using Common.Models;
     using Common.Services;
+    using Democracy.UIForms.Helpers;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using Xamarin.Forms;
 
 
@@ -11,10 +13,11 @@
     {
 
         private readonly ApiService apiService;
-        private ObservableCollection<VotingEvent> votingEvents;
+        private List<VotingEvent> myVotingEvents;
+        private ObservableCollection<VotingEventItemViewModel> votingEvents;
         private bool isRefreshing;
 
-        public ObservableCollection<VotingEvent> VotingEvents
+        public ObservableCollection<VotingEventItemViewModel> VotingEvents
         {
             get => this.votingEvents;
             set => this.SetValue(ref this.votingEvents, value);
@@ -49,14 +52,39 @@
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
+                    Languages.Error,
                     response.Message,
-                    "Accept");
+                    Languages.Accept);
                 return;
             }
 
-            var myVotingEvents = (List<VotingEvent>)response.Result;
-            this.VotingEvents = new ObservableCollection<VotingEvent>(myVotingEvents);
+            this.myVotingEvents = (List<VotingEvent>)response.Result;
+            this.RefresVotingEventList();
+        }
+
+        public void AddProductToList(VotingEvent votingEvent)
+        {
+            this.myVotingEvents.Add(votingEvent);
+            this.RefresVotingEventList();
+        }
+
+        private void RefresVotingEventList()
+        {
+            this.VotingEvents = new ObservableCollection<VotingEventItemViewModel>(
+                this.myVotingEvents.Select(v => new VotingEventItemViewModel
+                {
+                    Id = v.Id,
+                    ImageFullPath = v.ImageFullPath,
+                    EventName = v.EventName,
+                    Description = v.Description,
+                    StartDate = v.StartDate,
+                    EndDate = v.EndDate,
+                    User = v.User
+                })
+                .OrderBy(v => v.StartDate)
+                .ToList());
         }
     }
+
 }
+
