@@ -261,6 +261,8 @@
             return View(view);
         }
 
+        // GET: Candidates/Delete
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCandidate(int? id)
         {
             if (id == null)
@@ -276,6 +278,9 @@
             return this.RedirectToAction($"Details/{VotingEventId}");
         }
 
+        // POST: Candidates/Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditCandidate(int? id)
         {
             if (id == null)
