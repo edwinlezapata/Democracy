@@ -241,6 +241,15 @@ namespace Democracy.UIForms.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modify User.
+        /// </summary>
+        public static string Modify_User {
+            get {
+                return ResourceManager.GetString("Modify User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password and the confirm do not match.
         /// </summary>
         public static string Not_match_password_error {

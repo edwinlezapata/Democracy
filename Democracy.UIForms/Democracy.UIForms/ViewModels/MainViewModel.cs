@@ -12,6 +12,8 @@ namespace Democracy.UIForms.ViewModels
 
         private static MainViewModel instance;
 
+        public User User { get; set; }
+
         public LoginViewModel Login { get; set; }
 
         public VotingEventsViewModel VotingEvents { get; set; }
@@ -21,6 +23,10 @@ namespace Democracy.UIForms.ViewModels
         public RegisterViewModel Register { get; set; }
 
         public RememberPasswordViewModel RememberPassword { get; set; }
+
+        public ProfileViewModel Profile { get; set; }
+
+        public ChangePasswordViewModel ChangePassword { get; set; }
 
         public MainViewModel()
         {
@@ -53,6 +59,14 @@ namespace Democracy.UIForms.ViewModels
             Icon = "ic_info",
             PageName = "AboutPage",
             Title = Languages.About
+        },
+
+
+        new Menu
+        {
+            Icon = "ic_person_pin",
+            PageName = "ProfilePage",
+            Title = Languages.ModifyUser
         },
 
         new Menu

@@ -318,13 +318,13 @@
             return View();
         }
 
-        public IActionResult RecoverPassword()
+        public IActionResult RecoveringPassword()
         {
             return this.View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel model)
+        public async Task<IActionResult> RecoveringPassword(RecoverPasswordViewModel model)
         {
             if (this.ModelState.IsValid)
             {

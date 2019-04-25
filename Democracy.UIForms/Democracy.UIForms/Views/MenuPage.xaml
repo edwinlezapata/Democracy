@@ -12,7 +12,14 @@
             	HeightRequest="150"
             	Source="Democracy4">
         	</Image>
-        	<ListView
+            <Label
+	            FontSize="Large"
+                FontAttributes="Bold"
+	            Text="{Binding User.FullName, StringFormat='Welcome: {0}'}"
+	            TextColor="Black">
+            </Label>
+
+            <ListView
                 BackgroundColor="transparent"
             	ItemsSource="{Binding Menus}"
             	HasUnevenRows="True"

@@ -74,6 +74,8 @@ namespace Democracy.UIForms.Helpers
         public static string ForgotPassword => Resource.Forgot_Password;
 
         public static string AddNewUser => Resource.Add_New_User;
+
+        public static string ModifyUser => Resource.Modify_User;
     }
 
 }

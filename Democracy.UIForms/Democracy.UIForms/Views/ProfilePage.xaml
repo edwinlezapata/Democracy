@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+         	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+         	x:Class="Democracy.UIForms.Views.ProfilePage"
+         	BindingContext="{Binding Main, Source={StaticResource Locator}}"
+         	Title="Modify User">
+    <ContentPage.Content>
+        <ScrollView
+        	BindingContext="{Binding Profile}">
+            <StackLayout
+            	Padding="8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="0"
+                    	Text="First Name"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="0"
+                    	Placeholder="Enter your first name..."
+                    	Text="{Binding User.FirstName}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="1"
+                    	Text="Last name"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="1"
+                    	Placeholder="Enter your last name..."
+                    	Text="{Binding User.LastName}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="2"
+                    	Text="Occupations"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="2"
+                    	Placeholder="Enter your Occupation..."
+                    	Text="{Binding User.Occupation}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="3"
+                    	Text="Stratum"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Picker 
+                        Grid.Column="1"
+                    	Grid.Row="3"
+                        x:Name="Stratum"
+                        Title ="Enter your Stratum..."
+                        SelectedIndex="{Binding User.Stratum}" HorizontalOptions="FillAndExpand">
+                        <Picker.Items>
+                            <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                            <x:String>4</x:String>
+                            <x:String>5</x:String>
+                            <x:String>6</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="4"
+                    	Text="Gender"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Picker 
+                        Grid.Column="1"
+                    	Grid.Row="4"
+                        x:Name="Gender" 
+                        Title ="Enter your Gender..."
+                        SelectedIndex="{Binding User.Gender}"
+                        HorizontalOptions="FillAndExpand">
+                        <Picker.Items>
+                            <x:String>Male</x:String>
+                            <x:String>Female</x:String>
+                            <x:String>Other</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="5"
+                    	Text="Phone"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="5"
+                    	Keyboard="Telephone"
+                    	Placeholder="Enter your phone number..."
+                    	Text="{Binding User.PhoneNumber}">
+                    </Entry>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="6"
+                    	Text="BirthDate"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <DatePicker
+                        Grid.Column="1"
+                    	Grid.Row="6"
+                        x:Name="Birthdate"
+                        Format="D"
+                        Date="{Binding User.BirthDay}">
+                    </DatePicker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="7"
+                    	Text="Country"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Picker
+                    	Grid.Column="1"
+                    	Grid.Row="7"
+                    	ItemDisplayBinding="{Binding Name}"
+                    	ItemsSource="{Binding Countries}"
+                    	SelectedItem="{Binding Country}"
+                    	Title="Select a country...">
+                    </Picker>
+                    <Label
+                        FontAttributes="Bold"
+                    	Grid.Column="0"
+                    	Grid.Row="8"
+                    	Text="City"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Picker
+                    	Grid.Column="1"
+                    	Grid.Row="8"
+                    	ItemDisplayBinding="{Binding Name}"
+                    	ItemsSource="{Binding Cities}"
+                    	SelectedItem="{Binding City}"
+                    	Title="Select a city...">
+                    </Picker>
+                </Grid>
+                <ActivityIndicator
+                	IsRunning="{Binding IsRunning}"
+                	VerticalOptions="CenterAndExpand">
+                </ActivityIndicator>
+                <Button
+                	BackgroundColor="Blue"
+                	BorderRadius="23"
+                	Command="{Binding SaveCommand}"
+                	HeightRequest="46"
+                	HorizontalOptions="FillAndExpand"
+                	IsEnabled="{Binding IsEnabled}"
+                	Text="Save"
+                	TextColor="White">
+                </Button>
+                <Button
+                	BackgroundColor="Navy"
+                	BorderRadius="23"
+                	Command="{Binding ModifyPasswordCommand}"
+                	HeightRequest="46"
+                	HorizontalOptions="FillAndExpand"
+                	IsEnabled="{Binding IsEnabled}"
+                	Text="Modify Password"
+                	TextColor="White">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

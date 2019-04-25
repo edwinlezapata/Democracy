@@ -13,16 +13,22 @@
         public string LastName { get; set; }
 
         [JsonProperty("occupation")]
-        public object Occupation { get; set; }
+        public string Occupation { get; set; }
 
         [JsonProperty("stratum")]
-        public object Stratum { get; set; }
+        public string Stratum { get; set; }
 
         [JsonProperty("gender")]
-        public object Gender { get; set; }
+        public string Gender { get; set; }
+
+        [JsonProperty("birthDay")]
+        public DateTime? BirthDay { get; set; }
 
         [JsonProperty("country")]
-        public object Country { get; set; }
+        public string Country { get; set; }
+
+        [JsonProperty("city")]
+        public string City { get; set; }
 
         [JsonProperty("isAdmin")]
         public bool IsAdmin { get; set; }

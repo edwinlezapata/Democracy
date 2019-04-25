@@ -132,8 +132,6 @@
         {
             await this.userManager.DeleteAsync(user);
         }
-
-
     }
 
 }

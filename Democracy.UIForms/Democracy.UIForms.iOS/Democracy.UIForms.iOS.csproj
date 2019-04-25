@@ -139,4 +139,7 @@
     <BundleResource Include="Resources\Democracy4.png" />
     <BundleResource Include="Resources\LogoDemocracy.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_person_pin.png" />
+  </ItemGroup>
 </Project>

@@ -207,4 +207,7 @@
   <data name="Add New User" xml:space="preserve">
     <value>Ajouter utilisateur</value>
   </data>
+  <data name="Modify User" xml:space="preserve">
+    <value>Modifier l'Utilisateur</value>
+  </data>
 </root>

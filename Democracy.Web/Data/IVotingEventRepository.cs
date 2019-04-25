@@ -21,6 +21,12 @@
 
         Task<int> DeleteCandidateAsync(Candidate candidate);
 
+        Task<Voting> GetVotingAsync(int id);
+
+        Task AddVoteAsync(VoteViewModel model);
+
+        
+
     }
 
 }

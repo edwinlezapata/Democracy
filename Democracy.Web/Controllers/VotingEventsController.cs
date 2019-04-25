@@ -27,7 +27,7 @@
         // GET: VotingEvents
         public IActionResult Index()
         {
-           // return View(this.votingEventRepository.GetAll());
+            // return View(this.votingEventRepository.GetAll());
             return View(this.votingEventRepository.GetVotingEventsWithCandidates());
         }
 
@@ -224,6 +224,27 @@
         {
             return this.View();
         }
+
+        // GET: VotingEvents/Create
+        /*[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddVote(int? id)
+        {
+            var user = await this.votingEventRepository.GetByIdAsync(id.Value);
+            if (user == null)
+            {
+               return NotFound();
+            }
+
+            var model = new VotingViewModel { VotingEventId = votingEvent.Id };
+            return View(model)
+
+            }*/
+
+
+
+
+
+
 
         // GET: VotingEvents/Create
         [Authorize(Roles = "Admin")]

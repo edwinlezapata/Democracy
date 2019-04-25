@@ -16,6 +16,20 @@
             this.context = context;
         }
 
+
+        public async Task AddVoteAsync(VoteViewModel model)
+        {
+            var voteEvent = await this.GetVoteEventWhitCandidateAsync(model.VoteId);
+            if (voteEvent == null)
+            {
+                return;
+            }
+
+            voteEvent.Votings.Add(new Voting{Vote = model.Vote,});
+            await this.context.SaveChangesAsync();
+
+        }
+
         //Actions whit Candidates
         public async Task AddCandidateAsync(CandidateViewModel model)
         {
@@ -42,6 +56,21 @@
                 .Include(c => c.Candidates)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<VotingEvent> GetVoteEventWhitCandidateAsync(int id)
+        {
+            return await this.context.VotingEvents
+                .Include(v => v.Votings)
+                .Include(c => c.Candidates)
+                .Include(u => u.User)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Voting> GetVotingAsync(int id)
+        {
+            return await this.context.Votings.FindAsync(id);
         }
 
         public IQueryable GetVotingEventsWithCandidates()
