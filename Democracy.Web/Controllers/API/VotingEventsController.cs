@@ -17,14 +17,9 @@
         }
 
         [HttpGet]
-       public IActionResult GetVotingEvents()
-       {
-         return Ok(this.votingEventRepository.GetAllWithUsers());
-       }
-
+        public IActionResult GetVotingEvents()
+        {
+            return Ok(this.votingEventRepository.GetAllWithUsersAndCandidates());
+        }
     }
-
-
-
-
 }

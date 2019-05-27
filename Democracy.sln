@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28714.193
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.Common", "Democracy.Common\Democracy.Common.csproj", "{7C2502F8-577D-4B47-9E86-D338E33647F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Democracy.Common", "Democracy.Common\Democracy.Common.csproj", "{7C2502F8-577D-4B47-9E86-D338E33647F4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{C8C60533-DFE6-4127-9F48-629E74D8FF6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{D2134E30-B557-411A-8EF2-9BBF0C55D486}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.Web", "Democracy.Web\Democracy.Web.csproj", "{AC491566-9068-43EE-A366-3EF7A1D8D700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Democracy.Web", "Democracy.Web\Democracy.Web.csproj", "{AC491566-9068-43EE-A366-3EF7A1D8D700}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{39ABEFF4-8AF2-4E1A-B8CA-7DABEBC6B093}"
 EndProject
@@ -19,13 +19,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.UIForms.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.UIForms.iOS", "Democracy.UIForms\Democracy.UIForms.iOS\Democracy.UIForms.iOS.csproj", "{23B6BCAB-C231-477C-915F-9B23D10620B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.UIForms", "Democracy.UIForms\Democracy.UIForms\Democracy.UIForms.csproj", "{7CEA1DBC-5BAD-4F2E-B6FE-01ED358683BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Democracy.UIForms", "Democracy.UIForms\Democracy.UIForms\Democracy.UIForms.csproj", "{7CEA1DBC-5BAD-4F2E-B6FE-01ED358683BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.UIClassic", "Democracy.UIClassic\Democracy.UIClassic.csproj", "{CF814A2A-95E3-4B75-BDF5-59D521E13CAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Democracy.UIClassic", "Democracy.UIClassic\Democracy.UIClassic.csproj", "{CF814A2A-95E3-4B75-BDF5-59D521E13CAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.UIClassic.Android", "Democracy.UIClassic.Android\Democracy.UIClassic.Android.csproj", "{DE6B3F6F-3450-415C-83D8-95282A142BC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.UIClassic.iOS", "Democracy.UIClassic.iOS\Democracy.UIClassic.iOS.csproj", "{2D760ABE-9313-4D80-90DF-5767DA02300F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVVMCross", "MVVMCross", "{28AEEB65-500F-4B40-9821-44C2034D360B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.UICross.Android", "Democracy.UICross.Android\Democracy.UICross.Android.csproj", "{D185B592-F83A-4477-8966-14DF6405247F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Democracy.UICross.iOS", "Democracy.UICross.iOS\Democracy.UICross.iOS.csproj", "{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +147,34 @@ Global
 		{2D760ABE-9313-4D80-90DF-5767DA02300F}.Release|iPhone.Build.0 = Release|iPhone
 		{2D760ABE-9313-4D80-90DF-5767DA02300F}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{2D760ABE-9313-4D80-90DF-5767DA02300F}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|iPhone.Deploy.0 = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|iPhone.Build.0 = Release|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|iPhone.Deploy.0 = Release|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D185B592-F83A-4477-8966-14DF6405247F}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Debug|iPhone.Build.0 = Debug|iPhone
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Release|iPhone.ActiveCfg = Release|iPhone
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Release|iPhone.Build.0 = Release|iPhone
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,6 +189,9 @@ Global
 		{CF814A2A-95E3-4B75-BDF5-59D521E13CAC} = {EA04A4A8-62F4-48EE-9DDC-DB3F95762CEE}
 		{DE6B3F6F-3450-415C-83D8-95282A142BC5} = {EA04A4A8-62F4-48EE-9DDC-DB3F95762CEE}
 		{2D760ABE-9313-4D80-90DF-5767DA02300F} = {EA04A4A8-62F4-48EE-9DDC-DB3F95762CEE}
+		{28AEEB65-500F-4B40-9821-44C2034D360B} = {D2134E30-B557-411A-8EF2-9BBF0C55D486}
+		{D185B592-F83A-4477-8966-14DF6405247F} = {28AEEB65-500F-4B40-9821-44C2034D360B}
+		{CECB9E4E-2D5F-465E-B64E-DBA98DBEDE3F} = {28AEEB65-500F-4B40-9821-44C2034D360B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {831A94C6-36B4-47D1-9563-53E9F40E9F40}

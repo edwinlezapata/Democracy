@@ -27,7 +27,7 @@
         public int NumberVotes => this.Votings == null ? 0 : this.Votings.Count;
 
 
-        public VotingEvent VotingEvent { get; set; }
+        //public VotingEvent VotingEvent { get; set; }
 
         public string ImageFullPath
         {

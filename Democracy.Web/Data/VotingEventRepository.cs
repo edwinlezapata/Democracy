@@ -1,6 +1,7 @@
 ﻿namespace Democracy.Web.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Democracy.Web.Models;
@@ -116,8 +117,14 @@
         public IQueryable GetAllWithUsers()
         {
             return this.context.VotingEvents
-
                 .Include(u => u.User);
+        }
+
+        public IQueryable GetAllWithUsersAndCandidates()
+        {
+            return this.context.VotingEvents
+                .Include(u => u.User)
+                .Include(u => u.Candidates);
         }
     }
 

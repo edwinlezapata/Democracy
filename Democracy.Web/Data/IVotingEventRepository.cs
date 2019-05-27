@@ -2,6 +2,7 @@
 {
     using Democracy.Web.Models;
     using Entities;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -25,8 +26,7 @@
 
         Task AddVoteAsync(VoteViewModel model);
 
-        
-
+        IQueryable GetAllWithUsersAndCandidates();
     }
 
 }
