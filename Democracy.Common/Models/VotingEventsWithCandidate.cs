@@ -3,13 +3,26 @@ using System;
 
 namespace Democracy.Common.Models
 {
-    public class VotingEvent
+
+    public class VotingEventsWithCandidate
     {
         [JsonProperty("id")]
         public int Id { get; set; }
 
+        [JsonProperty("nameCandidate")]
+        public string NameCandidate { get; set; }
+
+        [JsonProperty("proposal")]
+        public string Proposal { get; set; }
+
         [JsonProperty("imageFullPath")]
         public Uri ImageFullPath { get; set; }
+
+        [JsonProperty("numberVotes")]
+        public int NumberVotes { get; set; }
+
+        [JsonProperty("eventId")]
+        public int EventId { get; set; }
 
         [JsonProperty("eventName")]
         public string EventName { get; set; }
@@ -23,7 +36,12 @@ namespace Democracy.Common.Models
         [JsonProperty("endDate")]
         public DateTime? EndDate { get; set; }
 
-        [JsonProperty("user")]
-        public User User { get; set; }
-    } 
+        public bool ValidateUserVote { get; set; }
+
+        public bool LetVote { get; set; }
+
+        public string Paint { get; set; }
+
+    }
+
 }

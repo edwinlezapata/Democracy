@@ -269,7 +269,7 @@
                 LastName = this.LastName,
                 Occupation = this.Occupations,
                 Password = this.Password,
-                Phone = this.PhoneNumber,
+                PhoneNumber = this.PhoneNumber,
                 Stratum = this.Stratum,
             };
 

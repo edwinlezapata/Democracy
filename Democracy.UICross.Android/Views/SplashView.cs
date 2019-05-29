@@ -2,7 +2,7 @@
 {
     using global::Android.App;
     using global::Android.Content.PM;
-    using MvvmCross.Droid.Views;
+    using MvvmCross.Platforms.Android.Views;
 
     [Activity(
         Label = "@string/app_name",

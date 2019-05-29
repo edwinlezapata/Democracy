@@ -23,7 +23,7 @@ namespace Democracy.Common.Models
         public string Gender { get; set; }
 
         [Required]
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         public DateTime? BirthDay { get; set; }
