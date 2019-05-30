@@ -188,5 +188,4 @@
             await this.navigationService.Close(this);
         }
     }
-
 }

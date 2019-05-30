@@ -1,10 +1,12 @@
 ﻿namespace Democracy.Common.ViewModels
 {
+    using Democracy.Common.Helpers;
     using Interfaces;
     using Models;
     using MvvmCross.Commands;
     using MvvmCross.Navigation;
     using MvvmCross.ViewModels;
+    using Newtonsoft.Json;
     using Services;
     using System.Windows.Input;
 
@@ -21,10 +23,12 @@
 
         public LoginViewModel(
             IApiService apiService,
-            IDialogService dialogService)
+            IDialogService dialogService,
+            IMvxNavigationService navigationService)
         {
             this.apiService = apiService;
             this.dialogService = dialogService;
+            this.navigationService = navigationService;
 
             this.Email = "edwinlezapata@gmail.com";
             this.Password = "123456";
@@ -103,8 +107,11 @@
                 return;
             }
 
+            var token = (TokenResponse)response.Result;
+            Settings.UserEmail = this.Email;
+            Settings.Token = JsonConvert.SerializeObject(token);
             this.IsLoading = false;
-            this.dialogService.Alert("Ok", "Fuck yeah!", "Accept");
+            await this.navigationService.Navigate<VotingEventsViewModel>();
         }
 
         private async void DoRegisterCommand()

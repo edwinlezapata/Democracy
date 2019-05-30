@@ -12,8 +12,8 @@
 	<ImageView
     	android:id="@+id/imageViewEmail"
     	android:src="@drawable/Democracy2"
-    	android:layout_width="350dp"
-    	android:layout_height="200dp"
+    	android:layout_width="300dp"
+    	android:layout_height="250dp"
     	app:layout_constraintLeft_toRightOf="parent"
     	app:layout_constraintLeft_toLeftOf="parent"
     	app:layout_constraintRight_toRightOf="parent"/>
@@ -44,7 +44,7 @@
 
 	<EditText
     	android:id="@+id/editTextPassword"
-    	android:inputType="textEmailAddress"
+    	android:inputType="textPassword"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	local:MvxBind="Text Password"
@@ -59,14 +59,14 @@
     	app:layout_constraintBottom_toBottomOf="parent"
     	app:layout_constraintLeft_toLeftOf="parent"
     	app:layout_constraintRight_toRightOf="parent"
-    	android:paddingBottom="10dp">
+    	android:paddingBottom="20dp">
 
     	<Button
         	android:id="@+id/loginButton"
             android:textStyle="bold"
         	android:text="LOGIN"
         	android:layout_width="150dp"
-        	android:layout_marginLeft="25dp"
+        	android:layout_marginLeft="15dp"
         	android:layout_height="wrap_content"
         	android:layout_marginBottom="2dp"
         	android:background="@drawable/primary_button"
