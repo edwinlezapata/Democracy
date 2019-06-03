@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:local="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 	android:padding="10dp"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light">
 
 	<TextView
     	android:id="@+id/title_textView"
@@ -33,7 +36,7 @@
         	android:text="First Name:"/>
 
     	<EditText
-        	android:inputType="textEmailAddress"
+        	android:inputType="text"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
@@ -42,7 +45,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-    	android:id="@+id/flastName_layout"
+    	android:id="@+id/lastName_layout"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:orientation="horizontal"
@@ -56,7 +59,7 @@
         	android:text="Last Name:"/>
 
     	<EditText
-        	android:inputType="textEmailAddress"
+        	android:inputType="text"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
@@ -69,7 +72,7 @@
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:orientation="horizontal"
-    	local:layout_constraintTop_toBottomOf="@+id/flastName_layout">
+    	local:layout_constraintTop_toBottomOf="@+id/lastName_layout">
 
     	<TextView
         	android:layout_width="wrap_content"
@@ -87,12 +90,127 @@
 
 	</LinearLayout>
 
+    <LinearLayout
+    	android:id="@+id/occupationName_layout"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	local:layout_constraintTop_toBottomOf="@+id/emailName_layout">
+
+    	<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            android:textStyle="bold"
+        	android:textSize="15dp"
+        	android:text="Occupation:"/>
+
+    	<EditText
+        	android:inputType="text"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:textSize="15dp"
+        	local:MvxBind="Text Occupations"/>
+
+	</LinearLayout>
+
+    <LinearLayout
+    	android:id="@+id/stratumName_layout"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	local:layout_constraintTop_toBottomOf="@+id/occupationName_layout">
+
+    	<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            android:textStyle="bold"
+        	android:textSize="15dp"
+        	android:text="Stratum:"/>
+
+    	<EditText
+        	android:inputType="number"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:textSize="15dp"
+        	local:MvxBind="Text Stratum"/>
+
+	</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/genderName_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        local:layout_constraintTop_toBottomOf="@+id/stratumName_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:text="Gender:"/>
+
+        <EditText
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            local:MvxBind="Text Gender"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+    	android:id="@+id/phoneName_layout"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	local:layout_constraintTop_toBottomOf="@+id/genderName_layout">
+
+    	<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            android:textStyle="bold"
+        	android:textSize="15dp"
+        	android:text="Phone:"/>
+
+    	<EditText
+        	android:inputType="phone"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:textSize="15dp"
+        	local:MvxBind="Text PhoneNumber"/>
+
+	</LinearLayout>
+
+      <LinearLayout
+    	android:id="@+id/birthdateName_layout"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	local:layout_constraintTop_toBottomOf="@+id/phoneName_layout">
+
+    	<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            android:textStyle="bold"
+        	android:textSize="15dp"
+        	android:text="Birthdate:"/>
+
+    	<EditText
+        	android:inputType="text"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:textSize="15dp"
+        	local:MvxBind="Text Birthdate"/>
+
+	</LinearLayout>
+
 	<LinearLayout
     	android:id="@+id/countryName_layout"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:orientation="horizontal"
-    	local:layout_constraintTop_toBottomOf="@+id/emailName_layout">
+    	local:layout_constraintTop_toBottomOf="@+id/birthdateName_layout">
 
     	<TextView
         	android:layout_width="wrap_content"
@@ -130,7 +248,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-    	android:id="@+id/addressName_layout"
+    	android:id="@+id/passwordName_layout"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:orientation="horizontal"
@@ -141,56 +259,10 @@
         	android:layout_height="wrap_content"
             android:textStyle="bold"
         	android:textSize="15dp"
-        	android:text="Address:"/>
-
-    	<EditText
-        	android:inputType="textEmailAddress"
-        	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="15dp"
-        	local:MvxBind="Text Address"/>
-
-	</LinearLayout>
-
-	<LinearLayout
-    	android:id="@+id/phoneName_layout"
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal"
-    	local:layout_constraintTop_toBottomOf="@+id/addressName_layout">
-
-    	<TextView
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-            android:textStyle="bold"
-        	android:textSize="15dp"
-        	android:text="Phone:"/>
-
-    	<EditText
-        	android:inputType="textEmailAddress"
-        	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="15dp"
-        	local:MvxBind="Text Phone"/>
-
-	</LinearLayout>
-
-	<LinearLayout
-    	android:id="@+id/passwordName_layout"
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal"
-    	local:layout_constraintTop_toBottomOf="@+id/phoneName_layout">
-
-    	<TextView
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-            android:textStyle="bold"
-        	android:textSize="15dp"
         	android:text="Password:"/>
 
     	<EditText
-        	android:inputType="textEmailAddress"
+        	android:inputType="textPassword"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
@@ -213,11 +285,20 @@
         	android:text="Password confirm"/>
 
     	<EditText
-        	android:inputType="textEmailAddress"
+        	android:inputType="textPassword"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
         	local:MvxBind="Text ConfirmPassword"/>
+
+         <ProgressBar
+    	    android:layout_height="wrap_content"
+    	    android:layout_width="match_parent"
+    	    app:layout_constraintTop_toTopOf="@+id/title_textView"
+    	    app:layout_constraintBottom_toTopOf="@+id/confirmName_layout"
+    	    local:MvxBind="Visibility Visibility(IsLoading)"
+    	    android:indeterminateOnly="true"
+    	    android:keepScreenOn="true"/>
 
 	</LinearLayout>
 

@@ -211,14 +211,14 @@
                 return;
             }
 
-            //if (string.IsNullOrEmpty(this.BirthDay))
-            // {
-            //    await Application.Current.MainPage.DisplayAlert(
-            //        "Error",
-            //        "You must enter a BirthDay.",
-            //        "Accept");
-            //    return;
-            //}
+            if (this.BirthDay > DateTime.Now || this.BirthDay == null )
+             {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "You must enter a BirthDay.",
+                    "Accept");
+                return;
+            }
 
             if (string.IsNullOrEmpty(this.Password))
             {

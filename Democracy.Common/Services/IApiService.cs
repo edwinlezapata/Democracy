@@ -14,6 +14,8 @@
 
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
 
+        Task<Response> GetLastVotesAsync(string urlBase, string servicePrefix, string controller, string email, string tokenType, string accessToken);
+
         Task<Response> GetUserByEmailAsync(string urlBase, string servicePrefix, string controller, string email, string tokenType, string accessToken);
 
         Task<Response> PostAsync<T>(string urlBase, string servicePrefix, string controller, T model, string tokenType, string accessToken);

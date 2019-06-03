@@ -10,7 +10,11 @@
     {
         IQueryable GetAllWithUsers();
 
+        IQueryable GetVotingEventsWithCandidatesEnd();
+
         IQueryable GetVotingEventsWithCandidates();
+
+        IQueryable GetVotingEventWithId(int id);
 
         Task<VotingEvent> GetVotingEventWithCandidatesAsync(int id);
 

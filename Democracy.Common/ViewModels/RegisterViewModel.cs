@@ -1,5 +1,6 @@
 ﻿namespace Democracy.Common.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Windows.Input;
     using Interfaces;
@@ -22,13 +23,14 @@
         private string firstName;
         private string lastName;
         private string email;
-        private string occupation;
+        private string occupations;
         private string stratum;
         private string gender;
-        private string birthDay;
+        private DateTime birthDay;
         private string phoneNumber;
         private string password;
         private string confirmPassword;
+        private bool isLoading;
 
         public RegisterViewModel(
             IMvxNavigationService navigationService,
@@ -39,6 +41,7 @@
             this.navigationService = navigationService;
             this.dialogService = dialogService;
             this.LoadCountries();
+            this.IsLoading = false;
         }
 
         public ICommand RegisterCommand
@@ -68,10 +71,10 @@
             set => this.SetProperty(ref this.email, value);
         }
 
-        public string Occupation
+        public string Occupations
         {
-            get => this.occupation;
-            set => this.SetProperty(ref this.occupation, value);
+            get => this.occupations;
+            set => this.SetProperty(ref this.occupations, value);
         }
 
         public string Stratum
@@ -86,7 +89,7 @@
             set => this.SetProperty(ref this.gender, value);
         }
 
-        public string BirthDay
+        public DateTime BirthDay
         {
             get => this.birthDay;
             set => this.SetProperty(ref this.birthDay, value);
@@ -143,6 +146,12 @@
             }
         }
 
+        public bool IsLoading
+        {
+            get => this.isLoading;
+            set => this.SetProperty(ref this.isLoading, value);
+        }
+
         private async void LoadCountries()
         {
             var response = await this.apiService.GetListAsync<Country>(
@@ -161,15 +170,88 @@
 
         private async void RegisterUser()
         {
+            if (string.IsNullOrEmpty(this.FirstName))
+            {
+                this.dialogService.Alert("Error", "You must enter a first name.", "Accept");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.LastName))
+            {
+                this.dialogService.Alert("Error", "You must enter a last name.", "Accept");
+                return;
+            }
+            if (string.IsNullOrEmpty(this.Email))
+            {
+                this.dialogService.Alert("Error", "You must enter an email.", "Accept");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.Occupations))
+            {
+                this.dialogService.Alert("Error", "You must enter a Ocupation.", "Accept");
+                return;
+            }
+            if (string.IsNullOrEmpty(this.Stratum))
+            {
+                this.dialogService.Alert("Error", "You must enter a stratum.", "Accept");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.Gender))
+            {
+                this.dialogService.Alert("Error", "You must enter a gender.", "Accept");
+                return;
+            }
+
+            if (this.BirthDay > DateTime.Now || this.BirthDay ==null)
+            {
+                this.dialogService.Alert("Error", "You must enter a birthday.", "Accept");
+               return;
+           }
+
+              if (this.Countries == null)
+            {
+                this.dialogService.Alert("Error", "You must enter a country", "Accept");
+                return;
+            }
+            
+            if (this.Cities == null)
+            {
+               this.dialogService.Alert("Error", "You must enter a city", "Accept");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.PhoneNumber))
+            {
+                this.dialogService.Alert("Error", "You must enter a phoneNumber.", "Accept");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.Password))
+            {
+                this.dialogService.Alert("Error", "You must enter a password.", "Accept");
+                return;
+            }
+
+            if (!this.Password.Equals(this.ConfirmPassword))
+            {
+                this.dialogService.Alert("Error", "paswword don't mach ", "Aceptar");
+                return;
+            }
+
+            this.IsLoading = true;
             // TODO: Make the local validations
             var request = new NewUserRequest
             {
                 FirstName = this.FirstName,
                 LastName = this.LastName,
-                Occupation = this.occupation,
+                Email = this.Email,
+                Occupation = this.occupations,
                 Stratum = this.stratum,
                 Gender = this.gender,
-                //BirthDay = this.birthDay,
+                BirthDay = this.birthDay,
+                CityId = this.SelectedCity.Id,
                 PhoneNumber = this.phoneNumber,
                 Password = this.Password,
                 
@@ -180,11 +262,20 @@
                 "/api",
                 "/Account",
                 request);
+            if (!response.IsSuccess)
+            {
+                this.IsLoading = false;
+                this.dialogService.Alert(
+                    "Error", 
+                    response.Message, 
+                    "Accept");
+                return;
+            }
 
             this.dialogService.Alert("Ok", "The user was created succesfully, you must " +
                 "confirm your user by the email sent to you and then you could login with " +
                 "the email and password entered.", "Accept");
-
+            this.IsLoading = true;
             await this.navigationService.Close(this);
         }
     }

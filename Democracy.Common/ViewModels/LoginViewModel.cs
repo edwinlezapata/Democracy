@@ -18,18 +18,20 @@
         private MvxCommand registerCommand;
         private readonly IApiService apiService;
         private readonly IMvxNavigationService navigationService;
+        private readonly INetworkProvider networkProvider;
         private readonly IDialogService dialogService;
         private bool isLoading;
 
         public LoginViewModel(
             IApiService apiService,
             IDialogService dialogService,
-            IMvxNavigationService navigationService)
+            IMvxNavigationService navigationService,
+            INetworkProvider networkProvider)
         {
             this.apiService = apiService;
             this.dialogService = dialogService;
             this.navigationService = navigationService;
-
+            this.networkProvider = networkProvider;
             this.Email = "edwinlezapata@gmail.com";
             this.Password = "123456";
             this.IsLoading = false;
@@ -71,7 +73,6 @@
             }
         }
 
-
         private async void DoLoginCommand()
         {
             if (string.IsNullOrEmpty(this.Email))
@@ -83,6 +84,12 @@
             if (string.IsNullOrEmpty(this.Password))
             {
                 this.dialogService.Alert("Error", "You must enter a password.", "Accept");
+                return;
+            }
+
+            if (!this.networkProvider.IsConnectedToWifi())
+            {
+                this.dialogService.Alert("Error", "The App Democracy required a internet conection, please check and try again", "Accept");
                 return;
             }
 

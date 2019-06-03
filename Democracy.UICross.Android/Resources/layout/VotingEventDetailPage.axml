@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:local="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingLeft="15dp"
+	android:paddingRight="15dp"
+	android:paddingTop="15dp"
+    android:background="@android:color/holo_blue_light">
+
+	<LinearLayout
+    	android:paddingTop="10dp"
+    	android:paddingLeft="10dp"
+    	android:paddingRight="10dp"
+    	android:orientation="vertical"
+    	android:minWidth="25px"
+    	android:minHeight="25px"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content">
+
+    	
+    	<TextView
+        	android:text="Name:"
+        	android:textAppearance="?android:attr/textAppearanceLarge"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:minWidth="25px"
+        	android:minHeight="15px"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+        	local:MvxBind="Text VotingEvent.EventName" />
+
+    	<TextView
+        	android:text="Description"
+        	android:textAppearance="?android:attr/textAppearanceLarge"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:minWidth="15px"
+        	android:minHeight="10px"
+            android:textColor="@android:color/black"
+            local:MvxBind="Text VotingEvent.Description" />
+
+    	<MvxListView
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+        local:MvxItemTemplate="@layout/votingeventdetailrow"
+    	local:MvxBind="ItemsSource VotingEvent.Candidates"/>
+
+	</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

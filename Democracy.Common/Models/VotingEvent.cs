@@ -25,5 +25,11 @@ namespace Democracy.Common.Models
 
         [JsonProperty("user")]
         public User User { get; set; }
+
+        [JsonProperty("candidates")]
+        public Candidate[] Candidates { get; set; }
+
+        [JsonProperty("numberCandidates")]
+        public int NumberCandidates { get; set; }
     } 
 }

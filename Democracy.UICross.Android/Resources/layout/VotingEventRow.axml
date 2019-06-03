@@ -1,38 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:local="http://schemas.android.com/apk/res-auto"
-	android:orientation="horizontal"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<ffimageloading.cross.MvxCachedImageView
-    	android:layout_width="75dp"
-    	android:layout_height="75dp"
-    	android:layout_margin="10dp"
-    	local:MvxBind="ImagePath ImageFullPath" />
-	<LinearLayout
-    	android:orientation="vertical"
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent">
-    	<TextView
-        	android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="15dp"
-        	local:MvxBind="Text EventName" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/holo_blue_light">
+    <ffimageloading.cross.MvxCachedImageView
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_margin="20dp"
+        local:MvxBind="ImagePath ImageFullPath" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
         <TextView
-        	android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="10dp"
-        	local:MvxBind="Text Description" />
-    	<TextView
-        	android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="10dp"
-        	local:MvxBind="Text StartDate" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            local:MvxBind="Text EventName" />
         <TextView
-        	android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="10dp"
-        	local:MvxBind="Text EndDate" />
-	</LinearLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Description:"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            local:MvxBind="Text Description" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Start Date:"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="8dp"
+            local:MvxBind="Text StartDate" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="End Date:"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="8dp"
+            local:MvxBind="Text EndDate" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Candidates:"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="8dp"
+            local:MvxBind="Text Candidates" />
+    </LinearLayout>
 </LinearLayout>
+
+

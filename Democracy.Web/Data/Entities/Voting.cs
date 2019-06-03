@@ -18,6 +18,5 @@ namespace Democracy.Web.Data.Entities
 
         public int Vote { get; set; }
 
-       
     }
 }

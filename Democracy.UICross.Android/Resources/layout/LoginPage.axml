@@ -8,12 +8,13 @@
 	android:layout_height="match_parent"
 	android:paddingLeft="15dp"
 	android:paddingRight="15dp"
-	android:paddingTop="15dp">
+	android:paddingTop="15dp"
+    android:background="@android:color/holo_blue_light">
 	<ImageView
     	android:id="@+id/imageViewEmail"
-    	android:src="@drawable/Democracy2"
-    	android:layout_width="300dp"
-    	android:layout_height="250dp"
+    	android:src="@drawable/Democracy4"
+    	android:layout_width="350dp"
+    	android:layout_height="200dp"
     	app:layout_constraintLeft_toRightOf="parent"
     	app:layout_constraintLeft_toLeftOf="parent"
     	app:layout_constraintRight_toRightOf="parent"/>
@@ -23,6 +24,7 @@
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textColor="@android:color/black"
     	android:text="Email"
     	app:layout_constraintTop_toBottomOf="@+id/imageViewEmail"/>
 
@@ -39,6 +41,7 @@
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textColor="@android:color/black"
     	android:text="Password"
     	app:layout_constraintTop_toBottomOf="@+id/editTextEmail"/>
 

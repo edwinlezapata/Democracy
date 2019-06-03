@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">Democracy</string>
-    <string name="action_settings">Settings</string>
+  <string name="app_name">Democracy</string>
+  <string name="register">Register New User</string>
+  <string name="voting_event_details">Votings Details</string>
+  <string name="voting_events">Democracy Votings Events</string>
 </resources>
+

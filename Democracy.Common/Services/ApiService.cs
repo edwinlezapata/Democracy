@@ -3,12 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
-    using Models;
-    using Newtonsoft.Json;
     using System.Threading.Tasks;
     using System.Net.Http.Headers;
     using System.Text;
-
+    using Models;
+    using Newtonsoft.Json;
+ 
     public class ApiService : IApiService
     {
         public async Task<Response> GetListAsync<T>(
@@ -140,6 +140,53 @@
                 {
                     IsSuccess = false,
                     Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<Response> GetLastVotesAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string email,
+            string tokenType,
+            string accessToken)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(new RegisterVote { Email = email });
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                var url = $"{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = answer,
+                    };
+                }
+
+                List<Voting> votings = JsonConvert.DeserializeObject<List<Voting>>(answer);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = votings,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
                 };
             }
         }

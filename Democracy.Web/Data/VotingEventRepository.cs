@@ -126,6 +126,21 @@
                 .Include(u => u.User)
                 .Include(u => u.Candidates);
         }
+
+        public IQueryable GetVotingEventWithId(int id)
+        {
+            return this.context.VotingEvents
+            .Include(c => c.Candidates)
+            .Where(c => c.Id == id);
+        }
+
+        public IQueryable GetVotingEventsWithCandidatesEnd()
+        {
+            return this.context.VotingEvents
+           .Include(c => c.Candidates)
+           .Where(d => d.EndDate < DateTime.Now)
+           .OrderBy(e => e.EndDate);
+        }
     }
 
 }

@@ -68,7 +68,7 @@
                 Occupation = request.Occupation,
                 Stratum = request.Stratum,
                 Gender = request.Gender,
-                PhoneNumber = request.Phone,
+                PhoneNumber = request.PhoneNumber,
                 BirthDay = request.BirthDay,
                 CityId = request.CityId,
                 City = city

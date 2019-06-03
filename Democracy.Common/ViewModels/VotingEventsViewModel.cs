@@ -2,9 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Input;
     using Helpers;
     using Interfaces;
     using Models;
+    using MvvmCross.Commands;
+    using MvvmCross.Navigation;
     using MvvmCross.ViewModels;
     using Newtonsoft.Json;
     using Services;
@@ -14,6 +17,27 @@
         private List<VotingEvent> votingEvents;
         private readonly IApiService apiService;
         private readonly IDialogService dialogService;
+        private readonly IMvxNavigationService navigationService;
+        private MvxCommand<VotingEvent> itemClickCommand;
+
+        public VotingEventsViewModel(
+            IApiService apiService,
+            IDialogService dialogService,
+            IMvxNavigationService navigationService)
+        {
+            this.apiService = apiService;
+            this.dialogService = dialogService;
+            this.navigationService = navigationService;
+        }
+
+        public ICommand ItemClickCommand
+        {
+            get
+            {
+                this.itemClickCommand = new MvxCommand<VotingEvent>(this.OnItemClickCommand);
+                return itemClickCommand;
+            }
+        }
 
         public List<VotingEvent> VotingEvents
         {
@@ -21,13 +45,17 @@
             set => this.SetProperty(ref this.votingEvents, value);
         }
 
-        public VotingEventsViewModel(
-            IApiService apiService,
-            IDialogService dialogService)
+        public override void ViewAppeared()
         {
-            this.apiService = apiService;
-            this.dialogService = dialogService;
+            base.ViewAppeared();
             this.LoadVotingEvents();
+        }
+
+        private async void OnItemClickCommand(VotingEvent votingEvent)
+        {
+            await this.navigationService.Navigate<
+                VotingEventDetailViewModel, NavigationArgs>
+                (new NavigationArgs { VotingEvent = votingEvent });
         }
 
         private async void LoadVotingEvents()
