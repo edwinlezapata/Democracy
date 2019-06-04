@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Windows.Input;
+    using Democracy.Common.Helpers;
     using Interfaces;
     using Models;
     using MvvmCross.Commands;
@@ -154,10 +155,14 @@
 
         private async void LoadCountries()
         {
+            this.IsLoading = true;
+
             var response = await this.apiService.GetListAsync<Country>(
                 "https://democracy.azurewebsites.net",
                 "/api",
                 "/Countries");
+
+            this.IsLoading = false;
 
             if (!response.IsSuccess)
             {
@@ -181,7 +186,7 @@
                 this.dialogService.Alert("Error", "You must enter a last name.", "Accept");
                 return;
             }
-            if (string.IsNullOrEmpty(this.Email))
+            if (!RegexHelper.IsValidEmail(this.Email))
             {
                 this.dialogService.Alert("Error", "You must enter an email.", "Accept");
                 return;
@@ -241,7 +246,7 @@
             }
 
             this.IsLoading = true;
-            // TODO: Make the local validations
+            
             var request = new NewUserRequest
             {
                 FirstName = this.FirstName,
@@ -262,6 +267,9 @@
                 "/api",
                 "/Account",
                 request);
+
+            this.IsLoading = false;
+
             if (!response.IsSuccess)
             {
                 this.IsLoading = false;
@@ -272,11 +280,14 @@
                 return;
             }
 
-            this.dialogService.Alert("Ok", "The user was created succesfully, you must " +
+            this.dialogService.Alert(
+                "Ok",
+                "The user was created succesfully, you must " +
                 "confirm your user by the email sent to you and then you could login with " +
-                "the email and password entered.", "Accept");
-            this.IsLoading = true;
-            await this.navigationService.Close(this);
+                "the email and password entered.",
+                "Accept",
+                () => { this.navigationService.Close(this); }
+             );
         }
     }
 }

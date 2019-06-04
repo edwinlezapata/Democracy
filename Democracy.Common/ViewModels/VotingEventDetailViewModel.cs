@@ -64,7 +64,7 @@
         {
             this.dialogService.Confirm(
                 "Confirm vote",
-                $"You are sure that you want to vote for '{candidate.Name}' ",
+                $"You are sure that you want to vote for '{candidate.NameCandidate}' ",
                 "Yes",
                 "No",
                 () => { this.VoteToCandidate(candidate); },
@@ -100,7 +100,7 @@
 
             this.dialogService.Alert(
                 "Ok",
-                "Your vote for the candidate: " + candidate.Name + " has been successfully registered",
+                "Your vote for the candidate: " + candidate.NameCandidate + " has been successfully registered",
                 "Accept");
         }
     }

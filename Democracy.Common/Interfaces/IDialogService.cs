@@ -12,5 +12,12 @@ namespace Democracy.Common.Interfaces
             string dismissButtonTitle, 
             Action confirmed, 
             Action dismissed);
+
+        void Alert(
+            string message,
+            string title,
+            string okbtnText,
+            Action confirmed);
+
     }
 }

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:local="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-	android:padding="10dp"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
     android:background="@android:color/holo_blue_light">
 
-    <include
+	<include
     	layout="@layout/toolbar" />
 
 	<LinearLayout
@@ -22,14 +19,14 @@
     	android:layout_height="wrap_content"
     	local:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-	<LinearLayout
-    	android:id="@+id/firstName_layout"
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal"
-    	local:layout_constraintTop_toBottomOf="@+id/title_textView">
+    	<LinearLayout
+        	android:id="@+id/firstName_layout"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal"
+        	local:layout_constraintTop_toBottomOf="parent">
 
-    	<TextView
+            <TextView
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -41,7 +38,7 @@
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
-        	local:MvxBind="Text FirstName"/>
+        	local:MvxBind="Text User.FirstName"/>
 
 	</LinearLayout>
 
@@ -64,30 +61,7 @@
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
-        	local:MvxBind="Text LastName"/>
-
-	</LinearLayout>
-
-	<LinearLayout
-    	android:id="@+id/emailName_layout"
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal"
-    	local:layout_constraintTop_toBottomOf="@+id/lastName_layout">
-
-    	<TextView
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-            android:textStyle="bold"
-        	android:textSize="15dp"
-        	android:text="Email:"/>
-
-    	<EditText
-        	android:inputType="textEmailAddress"
-        	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="15dp"
-        	local:MvxBind="Text Email"/>
+        	local:MvxBind="Text User.LastName"/>
 
 	</LinearLayout>
 
@@ -110,7 +84,7 @@
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
-        	local:MvxBind="Text Occupations"/>
+        	local:MvxBind="Text User.Occupation"/>
 
 	</LinearLayout>
 
@@ -133,7 +107,7 @@
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
-        	local:MvxBind="Text Stratum"/>
+        	local:MvxBind="Text User.Stratum"/>
 
 	</LinearLayout>
 
@@ -156,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            local:MvxBind="Text Gender"/>
+            local:MvxBind="Text User.Gender"/>
 
     </LinearLayout>
 
@@ -179,7 +153,7 @@
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
-        	local:MvxBind="Text PhoneNumber"/>
+        	local:MvxBind="Text User.PhoneNumber"/>
 
 	</LinearLayout>
 
@@ -202,7 +176,7 @@
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:textSize="15dp"
-        	local:MvxBind="Text Birthdate"/>
+        	local:MvxBind="Text User.Birthdate"/>
 
 	</LinearLayout>
 
@@ -248,28 +222,6 @@
 
 	</LinearLayout>
 
-	<LinearLayout
-    	android:id="@+id/passwordName_layout"
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal"
-    	local:layout_constraintTop_toBottomOf="@+id/cityName_layout">
-
-    	<TextView
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-            android:textStyle="bold"
-        	android:textSize="15dp"
-        	android:text="Password:"/>
-
-    	<EditText
-        	android:inputType="textPassword"
-        	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="15dp"
-        	local:MvxBind="Text Password"/>
-
-	</LinearLayout>
 
 	<LinearLayout
     	android:id="@+id/confirmName_layout"
@@ -278,50 +230,26 @@
     	android:orientation="horizontal"
     	local:layout_constraintTop_toBottomOf="@+id/passwordName_layout">
 
-    	<TextView
-        	android:layout_width="wrap_content"
+        	
+    	<ProgressBar
+        	android:layout_margin="10dp"
         	android:layout_height="wrap_content"
-            android:textStyle="bold"
-        	android:textSize="15dp"
-        	android:text="Password confirm"/>
-
-    	<EditText
-        	android:inputType="textPassword"
         	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="15dp"
-        	local:MvxBind="Text ConfirmPassword"/>
-
+        	local:MvxBind="Visibility Visibility(IsLoading)"
+        	android:indeterminateOnly="true"
+        	android:keepScreenOn="true"/>
 	</LinearLayout>
-
-    <LinearLayout
-    	android:id="@+id/progressName_layout"
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal"
-    	local:layout_constraintTop_toBottomOf="@+id/confirmName_layout">
-
-         <ProgressBar
-    	    android:layout_height="wrap_content"
-    	    android:layout_width="match_parent"
-    	    app:layout_constraintTop_toTopOf="@+id/title_textView"
-    	    app:layout_constraintBottom_toTopOf="@+id/confirmName_layout"
-    	    local:MvxBind="Visibility Visibility(IsLoading)"
-    	    android:indeterminateOnly="true"
-    	    android:keepScreenOn="true"/>
-
-	</LinearLayout>
-
 
 	<Button
-    	android:id="@+id/newUserButton"
-    	android:text="REGISTER NEW USER"
+    	android:layout_margin="10dp"
+    	android:id="@+id/saveButton"
+    	android:text="Save"
+    	android:textColor="#FFFFFF"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:layout_marginBottom="2dp"
-    	local:MvxBind="Click RegisterCommand"
+    	local:MvxBind="Click SaveCommand"
     	local:layout_constraintBottom_toBottomOf="parent"
     	android:background="@drawable/primary_button"/>
-
 </android.support.constraint.ConstraintLayout>
 

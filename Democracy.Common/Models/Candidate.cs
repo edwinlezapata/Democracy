@@ -8,8 +8,8 @@ namespace Democracy.Common.Models
         [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("nameCandidate")]
+        public string NameCandidate { get; set; }
 
         [JsonProperty("proposal")]
         public string Proposal { get; set; }
