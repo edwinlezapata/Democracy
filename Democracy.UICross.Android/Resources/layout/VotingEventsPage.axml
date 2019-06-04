@@ -7,9 +7,6 @@
 	android:layout_height="fill_parent"
     android:background="@android:color/holo_blue_light">
 
-    <include
-            layout="@layout/toolbar" />
-
 	<MvxListView
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"

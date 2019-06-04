@@ -27,6 +27,7 @@
         Task<Response> RecoverPasswordAsync(string urlBase, string servicePrefix, string controller, RecoverPasswordRequest recoverPasswordRequest);
 
         Task<Response> RegisterUserAsync(string urlBase, string servicePrefix, string controller, NewUserRequest newUserRequest);
-        
+
+        Task<Response> AddVoteAsync(string urlBase, string servicePrefix, string controller, Voting newVoteRequest, string tokenType, string accessToken);
     }
 }

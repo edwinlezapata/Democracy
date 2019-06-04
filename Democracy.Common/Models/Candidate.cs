@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Democracy.Common.Models
 {
@@ -25,12 +23,6 @@ namespace Democracy.Common.Models
         [JsonProperty("imageFullPath")]
         public string ImageFullPath { get; set; }
 
-        public string NumberVotesText
-        {
-            get
-            {
-                return $"Total of votes: {Convert.ToString(this.NumberVotes)}";
-            }
-        }
+        public string NumberVotesText => $"Total of votes: {Convert.ToString(this.NumberVotes)}";
     }
 }

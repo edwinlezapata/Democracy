@@ -8,16 +8,13 @@ namespace Democracy.Common.Models
 
     public class Voting
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("user")]
-        public User User { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; set; }
 
         [JsonProperty("candidate")]
-        public Candidate Candidate { get; set; }
+        public int Candidate { get; set; }
 
         [JsonProperty("votingEvent")]
-        public VotingEvent VotingEvent { get; set; }
+        public int VotingEvent { get; set; }
     }
 }

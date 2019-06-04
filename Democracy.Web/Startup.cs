@@ -66,6 +66,7 @@
             services.AddScoped<IVotingEventRepository, VotingEventRepository>();
             services.AddScoped<ICandidateRepository, CandidateRepository>();
             services.AddScoped<IVotingEventRepository, VotingEventRepository>();
+            services.AddScoped<IVotingRepository, VotingRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<IMailHelper, MailHelper>();

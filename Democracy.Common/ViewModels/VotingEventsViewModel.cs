@@ -1,5 +1,6 @@
 ﻿namespace Democracy.Common.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Input;
@@ -53,6 +54,18 @@
 
         private async void OnItemClickCommand(VotingEvent votingEvent)
         {
+            if (votingEvent.StartDate > DateTime.Now)
+            {
+                this.dialogService.Alert("Atention", "The voting event has not started yet", "Accept");
+                return;
+            }
+
+            if (votingEvent.EndDate < DateTime.Now)
+            {
+                this.dialogService.Alert("Atention", "This event is over, then the results will be shown", "Accept");
+                return;
+            }
+
             await this.navigationService.Navigate<
                 VotingEventDetailViewModel, NavigationArgs>
                 (new NavigationArgs { VotingEvent = votingEvent });
